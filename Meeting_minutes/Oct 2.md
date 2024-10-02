@@ -4,7 +4,7 @@
 - Ask what TOC is in atacama soil dataset
 - What is the difference between SOC and TOC?
 - Potential Questions:
--   How do elevation and temperature impact the bacterial community composition and functional traits in soil vs. sand environments?
+- -How do elevation and temperature impact the bacterial community composition and functional traits in soil vs. sand environments?
 -   How do moisture content and relative humidity shape microbial functional diversity in soil vs. sand environments?
 -   How does the difference in pH between soil and sand samples affect the diversity and functional capabilities of microbial communities?
 - Does the presence or absence of vegetation influence the functional diversity of microbial communities in soil vs. sand?
