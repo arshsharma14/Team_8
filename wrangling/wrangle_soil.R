@@ -30,3 +30,6 @@ soil_select$ph_category <- cut(soil_select$ph, # make new column "ph_category"
                                breaks = soil_bins,        # cut function: divides numeric into intervals and labels them according to assigned labels
                                labels = soil_bin_labels, 
                                right = FALSE)
+
+category_counts_soil <- table(soil_select$ph_category)
+category_counts_df_soil <- as.data.frame(category_counts_soil)

@@ -30,3 +30,7 @@ wetlands_selected$ph_category <- cut(wetlands_selected$ph, # make new column "ph
                                      breaks = bins,        # cut function: divides numeric into intervals and labels them according to assigned labels
                                      labels = bin_labels, 
                                      right = FALSE)
+
+category_counts <- table(wetlands_selected$ph_category)
+category_counts_df <- as.data.frame(category_counts)
+
