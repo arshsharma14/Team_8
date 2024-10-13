@@ -33,3 +33,7 @@ soil_select$ph_category <- cut(soil_select$ph, # make new column "ph_category"
 
 category_counts_soil <- table(soil_select$ph_category)
 category_counts_df_soil <- as.data.frame(category_counts_soil)
+
+#Convert C:N ratio to numeric
+soil_select$cn_ratio <- as.numeric(soil_select$cn_ratio)
+

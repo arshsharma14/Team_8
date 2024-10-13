@@ -33,3 +33,12 @@ wetlands_selected$ph_category <- cut(wetlands_selected$ph, # make new column "ph
 
 category_counts <- table(wetlands_selected$ph_category)
 category_counts_df <- as.data.frame(category_counts)
+
+# Converting carbon and nitrogen content columns to numeric
+wetlands_selected$total_carbon_percent <- as.numeric(wetlands_selected$total_carbon_percent)
+wetlands_selected$total_nitrogen_percent <- as.numeric(wetlands_selected$total_nitrogen_percent)
+
+# Calculating C:N ratio 
+wetlands_selected$cn_ratio <- wetlands_selected$total_carbon_percent / wetlands_selected$total_nitrogen_percent
+
+
