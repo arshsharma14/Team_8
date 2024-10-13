@@ -37,3 +37,5 @@ category_counts_df_soil <- as.data.frame(category_counts_soil)
 #Convert C:N ratio to numeric
 soil_select$cn_ratio <- as.numeric(soil_select$cn_ratio)
 
+write.table(soil_select, file = "soil_one.tsv", sep = "\t", row.names = FALSE, col.names = TRUE, quote = FALSE)
+
