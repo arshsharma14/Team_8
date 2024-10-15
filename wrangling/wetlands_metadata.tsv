@@ -1,0 +1,193 @@
+#SampleID	env_feature	env_material	elevation_m	total_organic_carb_percent	total_inorganic_carbon_percent	total_carbon_percent	soil_total_inorganic_nitrogen	soil_nitrogen_units	total_nitrogen_percent	ph	ph_category	cn_ratio	cn_category
+10156.1.fastq.gz	freshwater wetland	soil	316	4.3522999999999996	9.8599999999999993E-2	4.451	8.5383130119999997	ug N/g dry soil	0.37641	6.6	Neutral	11.8248718153078	Low
+10156.10.fastq.gz	freshwater wetland	soil	148.9	0.80200000000000005	7.6700000000000004E-2	0.8787	57.987979099999997	ug N/g dry soil	0.12852	6.49	Slightly Acidic	6.83706816059757	Very Low
+10156.11.fastq.gz	freshwater wetland	soil	145.6	2.7339000000000002	9.6600000000000005E-2	2.831	91.159881150000004	ug N/g dry soil	0.28005	6.82	Neutral	10.1089091233708	Low
+10156.12.fastq.gz	freshwater wetland	soil	123.6	3.0787	0.28860000000000002	3.367	36.47373829	ug N/g dry soil	0.30462	7.18	Neutral	11.053115356838	Low
+10156.13.fastq.gz	freshwater wetland	soil	295	1.7453000000000001	0.42059999999999997	2.166	29.90403246	ug N/g dry soil	0.1914	7.24	Neutral	11.3166144200627	Low
+10156.14.fastq.gz	freshwater wetland	soil	111.8	0.2954	1.8599999999999998E-2	0.314	1.7985057929999999	ug N/g dry soil	0.07989	7.03	Neutral	3.93040430592064	Very Low
+10156.15.fastq.gz	freshwater wetland	soil	352.7	1.8691	6.5699999999999995E-2	1.935	12.064390850000001	ug N/g dry soil	0.17976	6.86	Neutral	10.7643524699599	Low
+10156.152b.fastq.gz	freshwater wetland	soil	146	Missing: Not provided	0.99419999999999997	2.003	3.5715361250000002	ug N/g dry soil	0.09451	7.44	Neutral	21.1935244947625	Intermediate
+10156.16.fastq.gz	freshwater wetland	soil	111.8	1.9285000000000001	4.4299999999999999E-2	1.973	10.69860974	ug N/g dry soil	0.21929	5.98	Slightly Acidic	8.99721829540791	Very Low
+10156.17.fastq.gz	freshwater wetland	soil	111.8	0.5806	0.38119999999999998	0.9618	1.380893591	ug N/g dry soil	0.1013	7.88	Slightly Basic	9.49457058242843	Very Low
+10156.18.fastq.gz	freshwater wetland	soil	419.1	0.4652	2.1899999999999999E-2	0.4871	89.786984129999993	ug N/g dry soil	0.09252	5.33	Slightly Acidic	5.26480760916558	Very Low
+10156.19.fastq.gz	freshwater wetland	soil	423.3	1.7221	3.5099999999999999E-2	1.757	87.511230260000005	ug N/g dry soil	0.17275	5.82	Slightly Acidic	10.1707670043415	Low
+10156.1B1.fastq.gz	freshwater wetland	soil	146	2.2589000000000001	1.2204999999999999	3.479	4.0666524600000002	ug N/g dry soil	0.10067	7.34	Neutral	34.5584583291944	High
+10156.1B2.fastq.gz	freshwater wetland	soil	146	4.4236000000000004	0.17580000000000001	4.599	2.6307871129999998	ug N/g dry soil	0.24977	6.71	Neutral	18.4129399047123	Low
+10156.1B3.fastq.gz	freshwater wetland	soil	146	1.4119999999999999	1.0610999999999999	2.473	0.95312476400000001	ug N/g dry soil	0.08584	7.38	Neutral	28.809412861137	Intermediate
+10156.1B4.fastq.gz	freshwater wetland	soil	146	4.0039999999999996	0.10009999999999999	4.104	2.041005797	ug N/g dry soil	0.15619	6.61	Neutral	26.2756898649081	Intermediate
+10156.1B5.fastq.gz	freshwater wetland	soil	146	3.1878000000000002	0.47560000000000002	3.663	4.7473363500000003	ug N/g dry soil	0.18856	7	Neutral	19.4261773440815	Low
+10156.1C1.fastq.gz	freshwater wetland	soil	146	2.5329000000000002	0.2722	2.805	0.65564831400000001	ug N/g dry soil	0.18804	6.65	Neutral	14.9170389278877	Low
+10156.1C2.fastq.gz	freshwater wetland	soil	146	1.5508	0.29299999999999998	1.844	2.1281522339999999	ug N/g dry soil	0.13098	6.98	Neutral	14.0784852649259	Low
+10156.1C3.1.fastq.gz	freshwater wetland	soil	146	1.9169	0.23519999999999999	2.152	1.726619586	ug N/g dry soil	0.15707	6.77	Neutral	13.7008976889285	Low
+10156.1C3.2.fastq.gz	freshwater wetland	soil	146	1.8495999999999999	3.9199999999999999E-2	1.889	1.836005678	ug N/g dry soil	0.13494	5.81	Slightly Acidic	13.9988142878316	Low
+10156.1C4.fastq.gz	freshwater wetland	soil	146	1.6385000000000001	0.22309999999999999	1.862	1.7908105139999999	ug N/g dry soil	0.12822	6.88	Neutral	14.5219154578069	Low
+10156.1S1.fastq.gz	freshwater wetland	soil	146	2.2357999999999998	0.8931	3.129	3.6004820230000001	ug N/g dry soil	0.12936	7.07	Neutral	24.1883116883117	Intermediate
+10156.1S2.fastq.gz	freshwater wetland	soil	146	Missing: Not provided	Missing: Not provided	NA	Missing: Not provided	ug N/g dry soil	NA	NA	NA	NA	NA
+10156.1S3.1.fastq.gz	freshwater wetland	soil	146	1.9621999999999999	0.91210000000000002	2.874	4.8861561599999996	ug N/g dry soil	0.13852	7.18	Neutral	20.7479064395033	Intermediate
+10156.1S3.2.fastq.gz	freshwater wetland	soil	146	0.81330000000000002	1.8341000000000001	2.647	2.1536556839999998	ug N/g dry soil	0.0687	7.31	Neutral	38.5298398835517	High
+10156.1S4.fastq.gz	freshwater wetland	soil	146	0.62319999999999998	1.1442000000000001	1.767	3.6397773550000001	ug N/g dry soil	0.06403	7.37	Neutral	27.5964391691395	Intermediate
+10156.1T1.fastq.gz	freshwater wetland	soil	146	1.5961000000000001	1.1085	2.705	0.70122342500000001	ug N/g dry soil	0.1429	7.33	Neutral	18.9293212036389	Low
+10156.1T2.fastq.gz	freshwater wetland	soil	146	2.1536	6.2300000000000001E-2	2.216	2.033181447	ug N/g dry soil	0.17465	6.1	Slightly Acidic	12.6882336100773	Low
+10156.1T3.fastq.gz	freshwater wetland	soil	146	1.9044000000000001	0.6643	2.569	2.1929337800000002	ug N/g dry soil	0.15058	7.1	Neutral	17.0606986319564	Low
+10156.1T4.fastq.gz	freshwater wetland	soil	146	3.1162999999999998	0.20730000000000001	3.324	1.59213198	ug N/g dry soil	0.23623	6.63	Neutral	14.0710324683571	Low
+10156.1T5.fastq.gz	freshwater wetland	soil	146	2.5983000000000001	1.0161	3.614	2.676790607	ug N/g dry soil	0.16616	7.22	Neutral	21.7501203659124	Intermediate
+10156.2.fastq.gz	freshwater wetland	soil	317	1.7735000000000001	5.4800000000000001E-2	1.828	47.07617947	ug N/g dry soil	0.18676	5.67	Slightly Acidic	9.7879631612765	Very Low
+10156.20.fastq.gz	freshwater wetland	soil	397.7	2.2751999999999999	3.1600000000000003E-2	2.307	64.600583779999994	ug N/g dry soil	0.17392	5.39	Slightly Acidic	13.2647194112236	Low
+10156.21.fastq.gz	freshwater wetland	soil	436	2.2905000000000002	3.7999999999999999E-2	2.329	28.86911048	ug N/g dry soil	0.19275	5.46	Slightly Acidic	12.083009079118	Low
+10156.22.fastq.gz	freshwater wetland	soil	418	0.32279999999999998	1.9199999999999998E-2	0.3419	0.90127716400000002	ug N/g dry soil	0.08263	6.92	Neutral	4.13772237686071	Very Low
+10156.23.fastq.gz	freshwater wetland	soil	134.1	1.0014000000000001	0.68140000000000001	1.683	0.53991939499999997	ug N/g dry soil	0.0953	7.56	Slightly Basic	17.6600209863589	Low
+10156.24.fastq.gz	freshwater wetland	soil	134.1	7.7031999999999998	0.20419999999999999	7.907	111.2568448	ug N/g dry soil	0.68429	6.36	Slightly Acidic	11.5550424527613	Low
+10156.25.fastq.gz	freshwater wetland	soil	134.1	8.8248999999999995	0.1721	8.997	147.5275872	ug N/g dry soil	0.82693	6.36	Slightly Acidic	10.8800019348675	Low
+10156.26.fastq.gz	freshwater wetland	soil	134.1	9.6428999999999991	0.19089999999999999	9.834	108.0309278	ug N/g dry soil	0.89807	6.22	Slightly Acidic	10.9501486521095	Low
+10156.27.fastq.gz	freshwater wetland	soil	125.2	9.3882999999999992	0.32719999999999999	9.715	17.70897987	ug N/g dry soil	0.78554	6.3	Slightly Acidic	12.3672887440487	Low
+10156.28.fastq.gz	freshwater wetland	soil	125.2	12.461	0.21299999999999999	12.67	97.344030259999997	ug N/g dry soil	1.0385	6.63	Neutral	12.2002888781897	Low
+10156.29.fastq.gz	freshwater wetland	soil	125.2	1.3616999999999999	5.9200000000000003E-2	1.421	38.061947719999999	ug N/g dry soil	0.20526	6.54	Neutral	6.92292701939004	Very Low
+10156.2B1.fastq.gz	freshwater wetland	soil	146	4.0876000000000001	1.234	5.322	1.9961034479999999	ug N/g dry soil	0.21514	7.13	Neutral	24.7373803104955	Intermediate
+10156.2B2.fastq.gz	freshwater wetland	soil	146	3.6377999999999999	1.3008999999999999	4.939	2.4764263500000001	ug N/g dry soil	0.20949	7.18	Neutral	23.5763043582033	Intermediate
+10156.2B3.fastq.gz	freshwater wetland	soil	146	3.5781000000000001	0.96730000000000005	4.545	1.1799205639999999	ug N/g dry soil	0.187	7.01	Neutral	24.3048128342246	Intermediate
+10156.2B4.fastq.gz	freshwater wetland	soil	146	1.6216999999999999	0.85980000000000001	2.481	0.96541052299999996	ug N/g dry soil	0.05723	7.13	Neutral	43.3513891315743	High
+10156.2B5.fastq.gz	freshwater wetland	soil	146	1.5464	1.5059	3.052	0.95141131000000001	ug N/g dry soil	0.05063	7.16	Neutral	60.2804661268023	Very High
+10156.2C1.fastq.gz	freshwater wetland	soil	146	0.37409999999999999	1.3090999999999999	1.683	0.59478057399999995	ug N/g dry soil	0.04956	7.7	Slightly Basic	33.9588377723971	High
+10156.2C2.fastq.gz	freshwater wetland	soil	146	1.9706999999999999	1.3894	3.36	2.1181268320000002	ug N/g dry soil	0.16713	7.46	Neutral	20.1041105726081	Intermediate
+10156.2C3.fastq.gz	freshwater wetland	soil	146	1.0096000000000001	1.7879	2.797	1.4478115739999999	ug N/g dry soil	0.09107	7.74	Slightly Basic	30.7126386296256	High
+10156.2C4.fastq.gz	freshwater wetland	soil	146	0.50890000000000002	0.93179999999999996	1.441	0.592472055	ug N/g dry soil	0.05416	7.62	Slightly Basic	26.6063515509601	Intermediate
+10156.2C5.fastq.gz	freshwater wetland	soil	146	0.86480000000000001	1.4953000000000001	2.36	1.1716953240000001	ug N/g dry soil	0.08353	7.74	Slightly Basic	28.2533221597031	Intermediate
+10156.2S1.fastq.gz	freshwater wetland	soil	146	1.3792	1.135	2.514	0.623288493	ug N/g dry soil	0.11323	7.15	Neutral	22.2025964850305	Intermediate
+10156.2S2.fastq.gz	freshwater wetland	soil	146	0.89280000000000004	1.2496	2.142	1.2362096419999999	ug N/g dry soil	0.08363	7.23	Neutral	25.6128183666149	Intermediate
+10156.2S3.fastq.gz	freshwater wetland	soil	146	1.3727	1.5	2.873	1.1922630999999999	ug N/g dry soil	0.13797	7.18	Neutral	20.8233673987099	Intermediate
+10156.2S4.fastq.gz	freshwater wetland	soil	146	1.5405	1.6048	3.145	2.213076386	ug N/g dry soil	0.12363	7.32	Neutral	25.4388093504813	Intermediate
+10156.2S5.fastq.gz	freshwater wetland	soil	146	0.64159999999999995	1.8489	2.491	0.84424683099999998	ug N/g dry soil	0.0518	7.34	Neutral	48.0888030888031	High
+10156.2T1.fastq.gz	freshwater wetland	soil	146	2.169	1.2565	3.426	2.1371831480000001	ug N/g dry soil	0.16636	7.12	Neutral	20.5938927626833	Intermediate
+10156.2T2.fastq.gz	freshwater wetland	soil	146	1.8459000000000001	1.3511	3.197	0.55841478300000003	ug N/g dry soil	0.15366	7.16	Neutral	20.8056748665886	Intermediate
+10156.2T3.fastq.gz	freshwater wetland	soil	146	3.3450000000000002	0.8306	4.176	1.178489796	ug N/g dry soil	0.28629	7.2	Neutral	14.5866079849104	Low
+10156.2T4.fastq.gz	freshwater wetland	soil	146	3.3039000000000001	0.92420000000000002	4.228	0.689143426	ug N/g dry soil	0.27418	7.1	Neutral	15.4205266613174	Low
+10156.2T5.fastq.gz	freshwater wetland	soil	146	2.0152999999999999	1.5315000000000001	3.547	2.4238122350000002	ug N/g dry soil	0.13992	7.29	Neutral	25.3502001143511	Intermediate
+10156.3.fastq.gz	freshwater wetland	soil	453.6	0.67	0.21460000000000001	0.8846	21.820179769999999	ug N/g dry soil	0.11636	7.39	Neutral	7.60226882090065	Very Low
+10156.30.fastq.gz	freshwater wetland	soil	125.2	4.532	0.1487	4.681	49.296852780000002	ug N/g dry soil	0.46382	6.54	Neutral	10.0922771764909	Low
+10156.31.fastq.gz	freshwater wetland	soil	453.9	0.14660000000000001	1.5586	1.705	2.0297466150000001	ug N/g dry soil	0.02779	8.22	Slightly Basic	61.3530046779417	Very High
+10156.32.fastq.gz	freshwater wetland	soil	453.9	0.1193	2.5121000000000002	2.631	3.1813663189999999	ug N/g dry soil	0.02086	8.39	Slightly Basic	126.126558005753	Very High
+10156.33.fastq.gz	freshwater wetland	soil	113	2.8815	0.45610000000000001	3.338	105.6645793	ug N/g dry soil	0.30729	6.85	Neutral	10.8627029841518	Low
+10156.34.fastq.gz	freshwater wetland	soil	372.6	2.88	7.6200000000000004E-2	2.956	31.272593180000001	ug N/g dry soil	0.31653	6.87	Neutral	9.33876725744795	Very Low
+10156.35.fastq.gz	freshwater wetland	soil	372.6	0.78239999999999998	4.3900000000000002E-2	0.8263	11.34994425	ug N/g dry soil	0.13291	6.9	Neutral	6.21698893988413	Very Low
+10156.36.fastq.gz	freshwater wetland	soil	408.9	0.19900000000000001	4.19E-2	0.2408	0.570586174	ug N/g dry soil	0.04735	7.73	Slightly Basic	5.08553326293559	Very Low
+10156.37.fastq.gz	freshwater wetland	soil	408.9	2.6495000000000002	0.1084	2.758	5.9784025720000002	ug N/g dry soil	0.26913	6.66	Neutral	10.2478356184743	Low
+10156.38.fastq.gz	freshwater wetland	soil	408.9	7.9608999999999996	0.1923	8.153	13.945316269999999	ug N/g dry soil	0.55299	6.26	Slightly Acidic	14.7434854156495	Low
+10156.39.fastq.gz	freshwater wetland	soil	408.9	4.1429999999999998	0.12659999999999999	4.27	50.560971420000001	ug N/g dry soil	0.4378	5.95	Slightly Acidic	9.75331201461855	Very Low
+10156.3B1.fastq.gz	freshwater wetland	soil	113	1.6052999999999999	1.1181000000000001	2.723	2.105734483	ug N/g dry soil	0.08092	7.29	Neutral	33.6505190311419	High
+10156.3B2.fastq.gz	freshwater wetland	soil	113	1.2566999999999999	1.4460999999999999	2.703	2.6863847230000002	ug N/g dry soil	0.07326	7.4	Neutral	36.8959868959869	High
+10156.3B3.fastq.gz	freshwater wetland	soil	113	2.7795000000000001	0.18609999999999999	2.966	0.57487209900000003	ug N/g dry soil	0.12036	6.98	Neutral	24.6427384513127	Intermediate
+10156.3B4.fastq.gz	freshwater wetland	soil	113	2.2471000000000001	0.74239999999999995	2.989	2.6137630430000001	ug N/g dry soil	0.10504	7.27	Neutral	28.455826351866	Intermediate
+10156.3B5.fastq.gz	freshwater wetland	soil	113	2.4447000000000001	7.3700000000000002E-2	2.518	3.5065622159999998	ug N/g dry soil	0.1427	6.81	Neutral	17.645409950946	Low
+10156.3C1.fastq.gz	freshwater wetland	soil	113	0.54179999999999995	1.3362000000000001	1.878	2.371289435	ug N/g dry soil	0.0705	7.46	Neutral	26.6382978723404	Intermediate
+10156.3C2.fastq.gz	freshwater wetland	soil	113	1.1709000000000001	0.34350000000000003	1.514	1.083016961	ug N/g dry soil	0.09374	7.3	Neutral	16.151056112652	Low
+10156.3C3.fastq.gz	freshwater wetland	soil	113	1.052	0.34189999999999998	1.394	2.8258872479999999	ug N/g dry soil	0.12571	7.36	Neutral	11.0890143982181	Low
+10156.3C4.fastq.gz	freshwater wetland	soil	113	0.7198	0.29470000000000002	1.015	1.3945828790000001	ug N/g dry soil	0.11495	7.23	Neutral	8.82992605480644	Very Low
+10156.3C5.fastq.gz	freshwater wetland	soil	113	0.65080000000000005	4.07E-2	0.6916	1.081482638	ug N/g dry soil	0.07374	7.12	Neutral	9.37889883374017	Very Low
+10156.3S1.fastq.gz	freshwater wetland	soil	113	0.93759999999999999	1.4654	2.403	3.6492327470000001	ug N/g dry soil	0.10019	7.38	Neutral	23.9844295837908	Intermediate
+10156.3S2.fastq.gz	freshwater wetland	soil	113	0.82769999999999999	0.96240000000000003	1.79	2.7897447999999998	ug N/g dry soil	0.08902	7.38	Neutral	20.1078409346214	Intermediate
+10156.3S3.fastq.gz	freshwater wetland	soil	113	0.88060000000000005	0.71630000000000005	1.597	1.9561192199999999	ug N/g dry soil	0.09805	7.33	Neutral	16.2876083630801	Low
+10156.3S4.fastq.gz	freshwater wetland	soil	113	0.59989999999999999	0.93989999999999996	1.54	2.3264548299999999	ug N/g dry soil	0.07711	7.73	Slightly Basic	19.9714693295292	Low
+10156.3S5.fastq.gz	freshwater wetland	soil	113	0.56589999999999996	0.5232	1.089	1.5379541059999999	ug N/g dry soil	0.07396	7.35	Neutral	14.724175229854	Low
+10156.3T1.fastq.gz	freshwater wetland	soil	113	0.6744	0.66120000000000001	1.336	2.882871331	ug N/g dry soil	0.07531	7.25	Neutral	17.7400079670694	Low
+10156.3T2.fastq.gz	freshwater wetland	soil	113	0.78900000000000003	1.0837000000000001	1.873	4.5591752019999996	ug N/g dry soil	0.1049	7.32	Neutral	17.8551000953289	Low
+10156.3T3.fastq.gz	freshwater wetland	soil	113	2.3007	7.1499999999999994E-2	2.372	0.65172095299999999	ug N/g dry soil	0.23341	6.38	Slightly Acidic	10.1623752195707	Low
+10156.3T4.fastq.gz	freshwater wetland	soil	113	0.86140000000000005	0.86619999999999997	1.728	2.670958841	ug N/g dry soil	0.09798	7.28	Neutral	17.636252296387	Low
+10156.3T5.fastq.gz	freshwater wetland	soil	113	1.3724000000000001	0.34339999999999998	1.716	2.4580852879999999	ug N/g dry soil	0.14514	7.24	Neutral	11.8230673832162	Low
+10156.4.fastq.gz	freshwater wetland	soil	408.7	1.4624999999999999	2.63E-2	1.489	19.32975897	ug N/g dry soil	0.15202	5.67	Slightly Acidic	9.79476384686226	Very Low
+10156.40.fastq.gz	freshwater wetland	soil	408.9	2.5524	5.8500000000000003E-2	2.611	34.94392465	ug N/g dry soil	0.23334	5.73	Slightly Acidic	11.1896802948487	Low
+10156.41.fastq.gz	freshwater wetland	soil	423.2	3.9342000000000001	0.1012	4.035	67.646534680000002	ug N/g dry soil	0.41846	6.55	Neutral	9.64249868565693	Very Low
+10156.42.fastq.gz	freshwater wetland	soil	423.2	0.2447	3.9899999999999998E-2	0.2846	0.65098257299999995	ug N/g dry soil	0.06451	7.73	Slightly Basic	4.41171911331577	Very Low
+10156.43.fastq.gz	freshwater wetland	soil	423.2	0.56859999999999999	7.2700000000000001E-2	0.6413	1.5192218689999999	ug N/g dry soil	0.07927	7.62	Slightly Basic	8.09007190614356	Very Low
+10156.44.A.fastq.gz	freshwater wetland	soil	423.2	Missing: Not provided	5.2999999999999999E-2	0.327	0.60321999000000004	ug N/g dry soil	0.06331	7.8	Slightly Basic	5.16506081187806	Very Low
+10156.44.fastq.gz	freshwater wetland	soil	423.2	Missing: Not provided	Missing: Not provided	NA	Missing: Not provided	ug N/g dry soil	NA	NA	NA	NA	NA
+10156.45.fastq.gz	freshwater wetland	soil	511.4	0.7097	4.9200000000000001E-2	0.7589	7.2751444789999997	ug N/g dry soil	0.11648	6.57	Neutral	6.51528159340659	Very Low
+10156.46.fastq.gz	freshwater wetland	soil	516.9	1.194	2.3900000000000001E-2	1.218	10.47978687	ug N/g dry soil	0.15234	5.85	Slightly Acidic	7.99527372981489	Very Low
+10156.47.fastq.gz	freshwater wetland	soil	558	4.5157999999999996	7.7600000000000002E-2	4.593	28.28710452	ug N/g dry soil	0.34327	5.06	Slightly Acidic	13.3801380837242	Low
+10156.48.fastq.gz	freshwater wetland	soil	424.3	0.4884	1.0407999999999999	1.529	1.0170804120000001	ug N/g dry soil	0.0794	7.96	Slightly Basic	19.2569269521411	Low
+10156.49.fastq.gz	freshwater wetland	soil	425.7	8.9954000000000001	0.15759999999999999	9.153	18.827017120000001	ug N/g dry soil	0.76336	7.01	Neutral	11.9904108153427	Low
+10156.4B1.fastq.gz	freshwater wetland	soil	387	2.4026000000000001	3.5799999999999998E-2	2.438	7.8839393849999997	ug N/g dry soil	0.16821	4.54	Moderately Acidic	14.4937875274954	Low
+10156.4B2.fastq.gz	freshwater wetland	soil	387	2.3891	3.9800000000000002E-2	2.429	3.5650347039999999	ug N/g dry soil	0.15492	5.01	Slightly Acidic	15.6790601600826	Low
+10156.4B5.fastq.gz	freshwater wetland	soil	387	2.0476000000000001	2.8299999999999999E-2	2.076	4.1377983010000001	ug N/g dry soil	0.13553	4.64	Moderately Acidic	15.3176418505128	Low
+10156.4C2.fastq.gz	freshwater wetland	soil	387	0.51639999999999997	2.6700000000000002E-2	0.5431	2.6508799340000002	ug N/g dry soil	0.11019	4.5	Moderately Acidic	4.92875941555495	Very Low
+10156.4C3.fastq.gz	freshwater wetland	soil	387	0.4022	2.8799999999999999E-2	0.431	1.355460364	ug N/g dry soil	0.11433	4.5	Moderately Acidic	3.76978920668241	Very Low
+10156.4C4.fastq.gz	freshwater wetland	soil	387	0.67379999999999995	3.0200000000000001E-2	0.704	2.1706934059999998	ug N/g dry soil	0.12014	4.6	Moderately Acidic	5.85983019810221	Very Low
+10156.4S1.fastq.gz	freshwater wetland	soil	387	0.53869999999999996	2.4799999999999999E-2	0.5634	2.7448542279999999	ug N/g dry soil	0.10832	4.42	Moderately Acidic	5.20125553914328	Very Low
+10156.4S3.fastq.gz	freshwater wetland	soil	387	0.80720000000000003	2.58E-2	0.833	12.733584759999999	ug N/g dry soil	0.12681	4.77	Moderately Acidic	6.56888258023815	Very Low
+10156.4S4.fastq.gz	freshwater wetland	soil	387	0.80089999999999995	2.9399999999999999E-2	0.8303	1.8467715929999999	ug N/g dry soil	0.13176	4.35	Moderately Acidic	6.30160898603522	Very Low
+10156.4T1.fastq.gz	freshwater wetland	soil	387	1.6042000000000001	4.2500000000000003E-2	1.647	1.4450462049999999	ug N/g dry soil	0.18985	4.65	Moderately Acidic	8.6752699499605	Very Low
+10156.4T2.fastq.gz	freshwater wetland	soil	387	0.87570000000000003	3.1E-2	0.9067	1.451827438	ug N/g dry soil	0.13382	4.45	Moderately Acidic	6.7755193543566	Very Low
+10156.4T4.fastq.gz	freshwater wetland	soil	387	0.97689999999999999	3.2099999999999997E-2	1.009	0.61332551400000002	ug N/g dry soil	0.14351	4.55	Moderately Acidic	7.0308689289945	Very Low
+10156.5.fastq.gz	freshwater wetland	soil	406	1.2638	2.9700000000000001E-2	1.294	20.6478921	ug N/g dry soil	0.11829	5.84	Slightly Acidic	10.9392171781216	Low
+10156.50.fastq.gz	freshwater wetland	soil	428.9	5.5395000000000003	8.0500000000000002E-2	5.62	86.326978920000002	ug N/g dry soil	0.39303	6.07	Slightly Acidic	14.2991629137725	Low
+10156.51.fastq.gz	freshwater wetland	soil	386	0.18859999999999999	3.6602000000000001	3.849	0.50757596500000002	ug N/g dry soil	0.04234	8.37	Slightly Basic	90.9069437883798	Very High
+10156.52.fastq.gz	freshwater wetland	soil	386	1.1382000000000001	0.79420000000000002	1.932	11.53839533	ug N/g dry soil	0.15552	7.68	Slightly Basic	12.4228395061728	Low
+10156.53.fastq.gz	freshwater wetland	soil	386	0.63300000000000001	0.51349999999999996	1.146	3.342596012	ug N/g dry soil	0.1046	7.73	Slightly Basic	10.9560229445507	Low
+10156.54.fastq.gz	freshwater wetland	soil	393	3.7923	9.2700000000000005E-2	3.885	61.785724989999999	ug N/g dry soil	0.43213	6.28	Slightly Acidic	8.99035012611945	Very Low
+10156.55.fastq.gz	freshwater wetland	soil	393	3.3361000000000001	0.10009999999999999	3.436	67.484575070000005	ug N/g dry soil	0.37879	6.13	Slightly Acidic	9.07098920246047	Very Low
+10156.56.A.fastq.gz	freshwater wetland	soil	393	Missing: Not provided	0.1069	4.17	83.929744729999996	ug N/g dry soil	0.45196	6.3	Slightly Acidic	9.22648021948845	Very Low
+10156.56.fastq.gz	freshwater wetland	soil	393	Missing: Not provided	Missing: Not provided	NA	Missing: Not provided	ug N/g dry soil	NA	NA	NA	NA	NA
+10156.6.fastq.gz	freshwater wetland	soil	377.7	1.3363	0.71609999999999996	2.052	11.16556701	ug N/g dry soil	0.16332	7.21	Neutral	12.5642909625276	Low
+10156.7.fastq.gz	freshwater wetland	soil	352.7	0.77400000000000002	0.30359999999999998	1.078	0.57532675	ug N/g dry soil	0.11326	7.95	Slightly Basic	9.51792336217553	Very Low
+10156.8.fastq.gz	freshwater wetland	soil	266	0.81920000000000004	2.2122000000000002	3.031	25.519237090000001	ug N/g dry soil	0.11896	7.72	Slightly Basic	25.4791526563551	Intermediate
+10156.9.fastq.gz	freshwater wetland	soil	166.1	0.45629999999999998	2.4058000000000002	2.862	2.1124250299999998	ug N/g dry soil	0.07657	7.97	Slightly Basic	37.3775630142353	High
+10156.BCWL1.1.fastq.gz	freshwater wetland	soil	387	1.9013	4.6899999999999997E-2	1.948	7.7802337120000002	ug N/g dry soil	0.2417	4.72	Moderately Acidic	8.05957798924286	Very Low
+10156.BCWL1.2.fastq.gz	freshwater wetland	soil	387	1.2966	3.4099999999999998E-2	1.331	5.2181280790000004	ug N/g dry soil	0.17001	4.75	Moderately Acidic	7.82895123816246	Very Low
+10156.BCWL1.3.fastq.gz	freshwater wetland	soil	387	1.6305000000000001	4.1399999999999999E-2	1.672	13.51929735	ug N/g dry soil	0.20438	4.69	Moderately Acidic	8.18083961248654	Very Low
+10156.BCWL2.1.fastq.gz	freshwater wetland	soil	387	2.1595	4.4299999999999999E-2	2.204	8.4966609139999996	ug N/g dry soil	0.2393	4.54	Moderately Acidic	9.2101964061847	Very Low
+10156.BCWL2.2.fastq.gz	freshwater wetland	soil	387	1.5403	3.9899999999999998E-2	1.58	21.76839064	ug N/g dry soil	0.19689	4.61	Moderately Acidic	8.02478541317487	Very Low
+10156.BCWL2.3.fastq.gz	freshwater wetland	soil	387	2.2728999999999999	4.5499999999999999E-2	2.318	72.544259749999995	ug N/g dry soil	0.23646	4.63	Moderately Acidic	9.80292649919648	Very Low
+10156.BCWL3.1.fastq.gz	freshwater wetland	soil	387	2.8569	4.1799999999999997E-2	2.899	2.4331466019999999	ug N/g dry soil	0.27735	4.69	Moderately Acidic	10.4524968451415	Low
+10156.BCWL3.2.fastq.gz	freshwater wetland	soil	387	2.3980000000000001	3.5200000000000002E-2	2.433	76.134082520000007	ug N/g dry soil	0.22328	4.65	Moderately Acidic	10.8966320315299	Low
+10156.BCWL3.3.fastq.gz	freshwater wetland	soil	387	3.2486999999999999	3.6299999999999999E-2	3.285	79.652519740000002	ug N/g dry soil	0.22838	4.68	Moderately Acidic	14.383921534285	Low
+10156.BCWL4.1.fastq.gz	freshwater wetland	soil	387	3.1698	4.7699999999999999E-2	3.217	31.930970739999999	ug N/g dry soil	0.25028	4.65	Moderately Acidic	12.8536039635608	Low
+10156.BCWL4.2.fastq.gz	freshwater wetland	soil	387	2.2465999999999999	4.7899999999999998E-2	2.295	22.675544670000001	ug N/g dry soil	0.26658	4.48	Moderately Acidic	8.60904794058069	Very Low
+10156.BCWL4.3.fastq.gz	freshwater wetland	soil	387	3.6964000000000001	4.3200000000000002E-2	3.74	12.87525849	ug N/g dry soil	0.25588	4.48	Moderately Acidic	14.6162263561044	Low
+10156.BCWL5.1.fastq.gz	freshwater wetland	soil	387	2.6911	3.8699999999999998E-2	2.73	112.1638803	ug N/g dry soil	0.252	5.06	Slightly Acidic	10.8333333333333	Low
+10156.BCWL5.2.fastq.gz	freshwater wetland	soil	387	4.2157999999999998	4.0500000000000001E-2	4.256	101.5762799	ug N/g dry soil	0.28757	5.03	Slightly Acidic	14.799874813089	Low
+10156.BCWL5.3.fastq.gz	freshwater wetland	soil	387	2.9578000000000002	4.1200000000000001E-2	2.999	111.40023170000001	ug N/g dry soil	0.24932	4.93	Moderately Acidic	12.0287181132681	Low
+10156.CBFSNW1.fastq.gz	freshwater wetland	soil	113	0.42449999999999999	2.3105000000000002	2.735	42.098361570000002	ug N/g dry soil	0.0599	7.34	Neutral	45.6594323873122	High
+10156.CBFSNW2.fastq.gz	freshwater wetland	soil	113	7.7087000000000003	0.52559999999999996	8.234	98.452631609999997	ug N/g dry soil	0.46449	6.37	Slightly Acidic	17.726969364249	Low
+10156.CBFSNW3.fastq.gz	freshwater wetland	soil	113	8.016	0.60309999999999997	8.619	123.30782240000001	ug N/g dry soil	0.50281	6.25	Slightly Acidic	17.1416638491677	Low
+10156.E1.1.fastq.gz	freshwater wetland	soil	24	Missing: Not provided	Missing: Not provided	NA	2.1304749030000001	ug N/g dry soil	NA	NA	NA	NA	NA
+10156.E1.2.fastq.gz	freshwater wetland	soil	24	Missing: Not provided	Missing: Not provided	NA	8.6629108279999993	ug N/g dry soil	NA	NA	NA	NA	NA
+10156.E1.3.fastq.gz	freshwater wetland	soil	24	Missing: Not provided	Missing: Not provided	NA	2.5775675680000001	ug N/g dry soil	NA	NA	NA	NA	NA
+10156.E1.4.fastq.gz	freshwater wetland	soil	24	Missing: Not provided	Missing: Not provided	NA	1.5723152170000001	ug N/g dry soil	NA	NA	NA	NA	NA
+10156.E1.5.fastq.gz	freshwater wetland	soil	24	Missing: Not provided	Missing: Not provided	NA	2.8537096769999999	ug N/g dry soil	NA	NA	NA	NA	NA
+10156.F1.1.fastq.gz	freshwater wetland	soil	38.71	Missing: Not provided	Missing: Not provided	NA	1.9970526319999999	ug N/g dry soil	NA	NA	NA	NA	NA
+10156.F1.2.fastq.gz	freshwater wetland	soil	38.71	Missing: Not provided	Missing: Not provided	NA	2.030293033	ug N/g dry soil	NA	NA	NA	NA	NA
+10156.F1.3.fastq.gz	freshwater wetland	soil	38.71	Missing: Not provided	Missing: Not provided	NA	2.2175366300000001	ug N/g dry soil	NA	NA	NA	NA	NA
+10156.F1.4.fastq.gz	freshwater wetland	soil	38.71	Missing: Not provided	Missing: Not provided	NA	1.8089289770000001	ug N/g dry soil	NA	NA	NA	NA	NA
+10156.F1.5.fastq.gz	freshwater wetland	soil	38.71	Missing: Not provided	Missing: Not provided	NA	1.593869497	ug N/g dry soil	NA	NA	NA	NA	NA
+10156.N1.1.fastq.gz	freshwater wetland	soil	9	Missing: Not provided	Missing: Not provided	NA	15.868909090000001	ug N/g dry soil	NA	NA	NA	NA	NA
+10156.N1.2.fastq.gz	freshwater wetland	soil	9	Missing: Not provided	Missing: Not provided	NA	7.2348679249999996	ug N/g dry soil	NA	NA	NA	NA	NA
+10156.N1.3.fastq.gz	freshwater wetland	soil	9	Missing: Not provided	Missing: Not provided	NA	18.861777780000001	ug N/g dry soil	NA	NA	NA	NA	NA
+10156.N1.4.fastq.gz	freshwater wetland	soil	9	Missing: Not provided	Missing: Not provided	NA	11.304103769999999	ug N/g dry soil	NA	NA	NA	NA	NA
+10156.N1.5.fastq.gz	freshwater wetland	soil	9	Missing: Not provided	Missing: Not provided	NA	5.452399057	ug N/g dry soil	NA	NA	NA	NA	NA
+10156.N2.1.fastq.gz	freshwater wetland	soil	7	Missing: Not provided	Missing: Not provided	NA	44.597142859999998	ug N/g dry soil	NA	NA	NA	NA	NA
+10156.N2.2.fastq.gz	freshwater wetland	soil	7	Missing: Not provided	Missing: Not provided	NA	65.334999999999994	ug N/g dry soil	NA	NA	NA	NA	NA
+10156.N2.3.fastq.gz	freshwater wetland	soil	7	Missing: Not provided	Missing: Not provided	NA	20.592980390000001	ug N/g dry soil	NA	NA	NA	NA	NA
+10156.N2.4.fastq.gz	freshwater wetland	soil	7	Missing: Not provided	Missing: Not provided	NA	26.024666669999998	ug N/g dry soil	NA	NA	NA	NA	NA
+10156.N2.5.fastq.gz	freshwater wetland	soil	7	Missing: Not provided	Missing: Not provided	NA	51.282727270000002	ug N/g dry soil	NA	NA	NA	NA	NA
+10156.NW1.A.fastq.gz	freshwater wetland	soil	386	20.943000000000001	0.14779999999999999	21.09	44.419294290000003	ug N/g dry soil	1.5759	NA	NA	13.3828288596992	Low
+10156.NW2.A.fastq.gz	freshwater wetland	soil	386	19.934999999999999	0.18820000000000001	20.12	44.069954039999999	ug N/g dry soil	1.46	NA	NA	13.7808219178082	Low
+10156.NW3.A.fastq.gz	freshwater wetland	soil	386	17.805	0.18579999999999999	17.99	30.636420640000001	ug N/g dry soil	1.2591	NA	NA	14.2879834802637	Low
+10156.NW4.A.fastq.gz	freshwater wetland	soil	386	10.257999999999999	0.1401	10.4	27.385145770000001	ug N/g dry soil	0.82946	5.25	Slightly Acidic	12.5382779157524	Low
+10156.NW5.A.fastq.gz	freshwater wetland	soil	386	15.11	0.14710000000000001	15.26	62.287363069999998	ug N/g dry soil	1.2163	5.09	Slightly Acidic	12.5462468141084	Low
+10156.T2.1.fastq.gz	freshwater wetland	soil	3	Missing: Not provided	Missing: Not provided	NA	1.1042302159999999	ug N/g dry soil	NA	NA	NA	NA	NA
+10156.T2.2.fastq.gz	freshwater wetland	soil	3	Missing: Not provided	Missing: Not provided	NA	4.8165842699999999	ug N/g dry soil	NA	NA	NA	NA	NA
+10156.T2.3.fastq.gz	freshwater wetland	soil	3	Missing: Not provided	Missing: Not provided	NA	1.5993897180000001	ug N/g dry soil	NA	NA	NA	NA	NA
+10156.T2.4.fastq.gz	freshwater wetland	soil	3	Missing: Not provided	Missing: Not provided	NA	0.97740000000000005	ug N/g dry soil	NA	NA	NA	NA	NA
+10156.T2.5.fastq.gz	freshwater wetland	soil	3	Missing: Not provided	Missing: Not provided	NA	0.79054706900000005	ug N/g dry soil	NA	NA	NA	NA	NA
+10156.T2.6.fastq.gz	freshwater wetland	soil	3	Missing: Not provided	Missing: Not provided	NA	3.4369448820000001	ug N/g dry soil	NA	NA	NA	NA	NA
+10156.T3.1.fastq.gz	freshwater wetland	soil	3	Missing: Not provided	Missing: Not provided	NA	4.1130845069999999	ug N/g dry soil	NA	NA	NA	NA	NA
+10156.T3.2.fastq.gz	freshwater wetland	soil	3	Missing: Not provided	Missing: Not provided	NA	2.6135583329999998	ug N/g dry soil	NA	NA	NA	NA	NA
+10156.T3.3.fastq.gz	freshwater wetland	soil	3	Missing: Not provided	Missing: Not provided	NA	1.324589837	ug N/g dry soil	NA	NA	NA	NA	NA
+10156.T3.4.fastq.gz	freshwater wetland	soil	3	Missing: Not provided	Missing: Not provided	NA	1.866506193	ug N/g dry soil	NA	NA	NA	NA	NA
+10156.T3.5.fastq.gz	freshwater wetland	soil	3	Missing: Not provided	Missing: Not provided	NA	0.39742499999999997	ug N/g dry soil	NA	NA	NA	NA	NA
+10156.T3.6.fastq.gz	freshwater wetland	soil	3	Missing: Not provided	Missing: Not provided	NA	0.37292122799999999	ug N/g dry soil	NA	NA	NA	NA	NA
+10156.T6.1.fastq.gz	freshwater wetland	soil	3	Missing: Not provided	Missing: Not provided	NA	2.8397409640000002	ug N/g dry soil	NA	NA	NA	NA	NA
+10156.T6.2.fastq.gz	freshwater wetland	soil	3	Missing: Not provided	Missing: Not provided	NA	1.690999074	ug N/g dry soil	NA	NA	NA	NA	NA
+10156.T6.3.fastq.gz	freshwater wetland	soil	3	Missing: Not provided	Missing: Not provided	NA	1.2901284399999999	ug N/g dry soil	NA	NA	NA	NA	NA
+10156.T6.4.fastq.gz	freshwater wetland	soil	3	Missing: Not provided	Missing: Not provided	NA	3.3243206110000001	ug N/g dry soil	NA	NA	NA	NA	NA
+10156.T6.5.fastq.gz	freshwater wetland	soil	3	Missing: Not provided	Missing: Not provided	NA	2.406669725	ug N/g dry soil	NA	NA	NA	NA	NA
+10156.T6.6.fastq.gz	freshwater wetland	soil	3	Missing: Not provided	Missing: Not provided	NA	1.367023973	ug N/g dry soil	NA	NA	NA	NA	NA

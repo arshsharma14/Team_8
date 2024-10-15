@@ -36,6 +36,28 @@ category_counts_df_soil <- as.data.frame(category_counts_soil)
 
 #Convert C:N ratio to numeric
 soil_select$cn_ratio <- as.numeric(soil_select$cn_ratio)
+range(soil_select$cn_ratio, na.rm = TRUE)
+ggplot(soil_select, aes(x=cn_ratio)) +
+  geom_histogram()
 
-write.table(soil_select, file = "soil_one.tsv", sep = "\t", row.names = FALSE, col.names = TRUE, quote = FALSE)
+#looking at C:N ratio after removing NA and those over 50
+soil_cn <- soil_select %>% filter(!is.na(cn_ratio) & cn_ratio < 50)
+range(soil_cn$cn_ratio, na.rm = TRUE)
+ggplot(soil_cn, aes(x=cn_ratio)) +
+  geom_histogram()
+
+#Adding bins for C:N ratio
+cn_bins <- c(-Inf, 10, 20, 30, 50, Inf)
+
+cn_bin_labels <- c("Very Low", "Low", "Intermediate", "High", "Very High")
+
+soil_select$cn_category <- cut(soil_select$cn_ratio, # make new column "ph_category"
+                               breaks = cn_bins,        # cut function: divides numeric into intervals and labels them according to assigned labels
+                               labels = cn_bin_labels, 
+                               right = FALSE)
+
+ggplot(soil_select, aes(x=cn_category)) +
+  geom_bar()
+
+write.table(soil_select, file = "soil_metadata.tsv", sep = "\t", row.names = FALSE, col.names = TRUE, quote = FALSE)
 
