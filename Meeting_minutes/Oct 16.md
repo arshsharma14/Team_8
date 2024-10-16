@@ -2,3 +2,4 @@
     - Explain how analyzing microbiome via pH bins would not yield significant results
     - Ask if there are any final improvements we should make to the research question (more specific, include more variables, etc.)
 - Ask any specific questions we have about the proposal
+- Ask about which variable region used for wetlands to be able to find primers for training a classifier
