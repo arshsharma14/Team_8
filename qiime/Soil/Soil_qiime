@@ -1,0 +1,244 @@
+# Create directories for each separate datasets
+mkdir soil
+mkdir wetlands
+
+# Import metadata files into server (from my computer terminal)
+scp soil_metadata.tsv root@10.19.139.187:~/data/soil
+scp wetlands_metadata.tsv root@10.19.139.187:~/data/wetlands
+
+# Import and demultiplex
+qiime tools import \
+  --type "SampleData[SequencesWithQuality]" \
+  --input-format SingleEndFastqManifestPhred33V2 \
+  --input-path /mnt/datasets/project_2/soil/soil_manifest.txt \
+  --output-path ./demux_seqs.qza
+# You will need to update the paths above
+
+# Create visualization of demultiplexed samples
+qiime demux summarize \
+  --i-data demux_seqs.qza \
+  --o-visualization demux_seqs.qzv
+
+# Copy file
+scp root@10.19.139.187:~/data/soil/demux_seqs.qzv . # Include period!!!
+
+#Demux Analysis: https://view.qiime2.org/ look at how many reads want to trim off - implement in nex step
+
+# screen commands
+screen -S <session name>
+conda activate qiime2-2023.7
+screen -ls
+screen -r <session name>
+
+# Determine ASVs with DADA2
+qiime dada2 denoise-single \
+  --i-demultiplexed-seqs demux_seqs.qza \
+  --p-trim-left 0 \
+  --p-trunc-len 407 \
+  --o-representative-sequences rep-seqs.qza \
+  --o-table table.qza \
+  --o-denoising-stats stats.qza
+
+# Visualize DADA2 stats
+qiime metadata tabulate \
+  --m-input-file stats.qza \
+  --o-visualization stats.qzv
+
+# Visualize ASVs stats
+qiime feature-table summarize \
+  --i-table table.qza \
+  --o-visualization table.qzv \
+  --m-sample-metadata-file soil_metadata.tsv
+  
+qiime feature-table tabulate-seqs \
+  --i-data rep-seqs.qza \
+  --o-visualization rep-seqs.qzv
+
+# Copy files onto computer for visualization
+scp root@10.19.139.187:/data/soil/rep-seqs.qzv .
+scp root@10.19.139.187:/data/soil/table.qzv .
+
+# Analysis of after denoising on https://view.qiime2.org/ 
+
+## Training a classifier ##
+# Extract your amplicon of interest from the reference database
+#replace the ref-otus.qza with the representative sequence file on the server (e.g. /mnt/datasets/silva_ref_files/silva-138-99-seqs.qza)
+#replace primer sequences with your correct sequences
+#replace trunc-len with the one you defined in your denoising step
+qiime feature-classifier extract-reads \
+  --i-sequences /mnt/datasets/silva_ref_files/silva-138-99-seqs.qza \
+  --p-f-primer AGAGTTTGATYMTGGCTCAG \
+  --p-r-primer ATTACCGCGGCTGCTGG \
+  --p-trunc-len 407 \
+  --o-reads ref-seqs-trimmed.qza
+
+ # Train classifier with your new ref-seq file
+# Replace ref-taxonomy.qza with the representative taxonomy file on the server (e.g. /mnt/datasets/silva_ref_files/silva-138-99-tax.qza)
+qiime feature-classifier fit-classifier-naive-bayes \
+  --i-reference-reads ref-seqs-trimmed.qza \
+  --i-reference-taxonomy /mnt/datasets/silva_ref_files/silva-138-99-tax.qza \
+  --o-classifier classifier.qza
+
+# Use the trained classifier to assign taxonomy to your reads (rep-seqs.qza)
+qiime feature-classifier classify-sklearn \
+  --i-classifier classifier.qza \
+  --i-reads rep-seqs.qza \
+  --o-classification taxonomy.qza
+
+qiime metadata tabulate \
+  --m-input-file taxonomy.qza \
+  --o-visualization taxonomy.qzv
+  
+# Taxonomy barplots
+qiime taxa barplot \
+  --i-table table.qza \
+  --i-taxonomy taxonomy.qza \
+  --m-metadata-file soil_metadata.tsv \
+  --o-visualization taxa-bar-plots.qzv
+
+# Copy files to computer
+  scp root@10.19.139.187:/data/soil/taxonomy.qzv .
+  scp root@10.19.139.187:/data/soil/taxa-bar-plots.qzv .
+
+# add files to qiime2.org
+  #taxonomy.qzv --> provides table of ASV, taxonomic info, and confidence levels for each ASV
+  #taxa-bar-plots.qzv --> diff taxonomic info shown in bar plot - can play around but R provide most meaningful info
+
+# Taxonomy-based filtering: filter out mitochondria and chloroplast sequences
+  qiime taxa filter-table \
+  --i-table table.qza \
+  --i-taxonomy taxonomy.qza \
+  --p-exclude mitochondria,chloroplast \
+  --o-filtered-table table-no-mitochondria-no-chloroplast.qza
+
+## METADATA BASED FILTERING - ADD HERE CN ratio does not equal NA##
+qiime feature-table filter-samples \
+  --i-table table-no-mitochondria-no-chloroplast.qza \
+  --m-metadata-file soil_metadata.tsv  \
+  --p-where "cn_category != 'NA'" \
+  --o-filtered-table filtered-table.qza
+
+ qiime feature-table summarize \
+  --i-table filtered-table.qza \
+  --o-visualization filtered-table.qzv \
+  --m-sample-metadata-file soil_metadata.tsv 
+
+qiime feature-table summarize \
+  --i-table table-no-mitochondria-no-chloroplast.qza \
+  --o-visualization table-no-mitochondria-no-chloroplast.qzv \
+  --m-sample-metadata-file soil_metadata.tsv 
+
+scp root@10.19.139.187:/data/soil/filtered-table.qzv  .
+scp root@10.19.139.187:/data/soil/table-no-mitochondria-no-chloroplast.qzv  .
+  # copy to computer and view qiime2
+
+# Generate a tree for phylogenetic diversity analyses
+qiime phylogeny align-to-tree-mafft-fasttree \
+  --i-sequences rep-seqs.qza \
+  --o-alignment aligned-rep-seqs.qza \
+  --o-masked-alignment masked-aligned-rep-seqs.qza \
+  --o-tree unrooted-tree.qza \
+  --o-rooted-tree rooted-tree.qza 
+# creates rooted: show lowest common ancestor LCA & unrooted: does not show LCA
+
+#ABOVE RUNNNING#
+
+# Sequencing depth: how many reads in sample
+  # Sampling depth: what want to set as our rarefaction parameter - any sample with lower amount of reads will be discarded 
+
+# XXXX - max 20,868 so chose 17,000
+# Alpha-rarefaction --> CHANGE MAX DEPTH according filtered-table
+qiime diversity alpha-rarefaction \
+  --i-table filtered-table.qza \
+  --i-phylogeny rooted-tree.qza \
+  --p-max-depth 17000 \
+  --m-metadata-file soil_metadata.tsv\
+  --o-visualization alpha-rarefaction.qzv
+
+# Copy files to computer - write on computer terminal
+  scp root@10.19.139.187:/data/soil/alpha-rarefaction.qzv .
+
+# View on qiime2 - observed_feature and barcode-seq --> check sequencing depth fall after plateau 
+# double check sequencing depth on the graph as doing above from table plot 2 steps above this to ensure u good with it
+
+#XXXX - double check on alpha rarefaction
+# Calculate alpha- and beta-diversity metrics
+# sampling-depth - you decide
+qiime diversity core-metrics-phylogenetic \
+  --i-phylogeny rooted-tree.qza \
+  --i-table filtered-table.qza \
+  --p-sampling-depth 3805 \
+  --m-metadata-file soil_metadata.tsv \
+  --output-dir core-metrics-results
+
+# Calculate alpha-group-significance
+qiime diversity alpha-group-significance \
+  --i-alpha-diversity core-metrics-results/faith_pd_vector.qza \
+  --m-metadata-file soil_metadata.tsv\
+  --o-visualization core-metrics-results/faith-pd-group-significance.qzv
+
+qiime diversity alpha-group-significance \
+  --i-alpha-diversity core-metrics-results/evenness_vector.qza \
+  --m-metadata-file soil_metadata.tsv \
+  --o-visualization core-metrics-results/evenness-group-significance.qzv
+  
+# Calculate beta-group-significance
+qiime diversity beta-group-significance \
+  --i-distance-matrix core-metrics-results/unweighted_unifrac_distance_matrix.qza \
+  --m-metadata-file soil_metadata.tsv \
+  --m-metadata-column cn_category \
+  --o-visualization core-metrics-results/unweighted-unifrac-donor-status-significance.qzv \
+  --p-pairwise
+
+# Copy files to computer - write on computer terminal
+scp -r root@10.19.139.187:/data/soil/core-metrics-results/ .
+
+# open all qzv files on qiime2.org to view 
+# p < 0.05 = significant --> use for alpha diversity usually same as q value
+# q-value = adjusted p-value --> look at q for beta diversity as q < 0.05 sig
+
+# Alpha: look diversity of each sample and comparing avgs of each other
+# Beta: more sophisticated comparison of multiple samples in one category to another as the reference point 
+# both can be used to compare --> just compare in diff way
+
+
+#PCoA: takes all variables of samples and creates 1 graph of similarity clustered
+
+# Exporting files to human readable form #
+
+mkdir soil_export
+cd soil_export
+
+qiime tools export \
+--input-path ../table.qza \
+--output-path table_export 
+
+cd table_export
+
+biom convert \
+-i feature-table.biom \
+--to-tsv \
+-o feature-table.txt
+
+cd ..
+
+qiime tools export \
+--input-path ../taxonomy.qza \
+--output-path taxonomy_export 
+
+cd taxonomy_export
+
+qiime tools export \
+--input-path ../rooted-tree.qza \
+--output-path rooted_tree_export 
+
+cd rooted_tree_export
+
+# Copy files to computer
+scp -r root@10.19.139.187:~/data/soil/soil_export .
+
+
+
+
+
+
