@@ -64,6 +64,9 @@ wetlands_selected$cn_category <- cut(wetlands_selected$cn_ratio, # make new colu
 ggplot(wetlands_selected, aes(x=cn_category)) +
   geom_bar()
 
+category_counts_w_cn <- table(wetlands_selected$cn_category)
+category_counts_df_w_cn <- as.data.frame(category_counts_w_cn)
+
 write.table(wetlands_selected, file = "wetlands_metadata.tsv", sep = "\t", row.names = FALSE, col.names = TRUE, quote = FALSE)
 
 

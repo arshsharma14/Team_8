@@ -59,6 +59,9 @@ soil_select$cn_category <- cut(soil_select$cn_ratio, # make new column "ph_categ
 ggplot(soil_select, aes(x=cn_category)) +
   geom_bar()
 
+category_counts_cn <- table(soil_select$cn_category)
+category_counts_df_cn <- as.data.frame(category_counts_cn)
+
 write.table(soil_select, file = "soil_metadata.tsv", sep = "\t", row.names = FALSE, col.names = TRUE, quote = FALSE)
 
 max(soil_select$cn_ratio, na.rm = TRUE)
