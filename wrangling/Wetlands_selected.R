@@ -40,5 +40,31 @@ wetlands_selected$total_nitrogen_percent <- as.numeric(wetlands_selected$total_n
 
 # Calculating C:N ratio 
 wetlands_selected$cn_ratio <- wetlands_selected$total_carbon_percent / wetlands_selected$total_nitrogen_percent
+range(wetlands_selected$cn_ratio, na.rm = TRUE)
+
+# Looking at C:N ratio distribution for whole metadata and for those without NA and > 50
+ggplot(wetlands_selected, aes(x=cn_ratio)) +
+  geom_histogram()
+
+wetlands_cn <- wetlands_selected %>% filter(!is.na(cn_ratio) & cn_ratio < 50)
+range(wetlands_cn$cn_ratio, na.rm = TRUE)
+ggplot(wetlands_cn, aes(x=cn_ratio)) +
+  geom_histogram()
+
+# Adding bins for C:N ratio
+cn_bins <- c(-Inf, 10, 20, 30, 50, Inf)
+
+cn_bin_labels <- c("Very Low", "Low", "Intermediate", "High", "Very High")
+
+wetlands_selected$cn_category <- cut(wetlands_selected$cn_ratio, # make new column "ph_category"
+                               breaks = cn_bins,        # cut function: divides numeric into intervals and labels them according to assigned labels
+                               labels = cn_bin_labels, 
+                               right = FALSE)
+
+ggplot(wetlands_selected, aes(x=cn_category)) +
+  geom_bar()
+
+write.table(wetlands_selected, file = "wetlands_metadata.tsv", sep = "\t", row.names = FALSE, col.names = TRUE, quote = FALSE)
+
 
 max(wetlands_selected$cn_ratio, na.rm = TRUE)
