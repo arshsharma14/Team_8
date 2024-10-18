@@ -41,4 +41,4 @@ wetlands_selected$total_nitrogen_percent <- as.numeric(wetlands_selected$total_n
 # Calculating C:N ratio 
 wetlands_selected$cn_ratio <- wetlands_selected$total_carbon_percent / wetlands_selected$total_nitrogen_percent
 
-
+max(wetlands_selected$cn_ratio, na.rm = TRUE)
