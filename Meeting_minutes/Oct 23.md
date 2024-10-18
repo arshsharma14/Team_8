@@ -1,0 +1,2 @@
+- Ask about sampling depth scross datasets and keeping them consistent to avoid sampling bias
+- Ask about merging datasets together and associated code for R analyses
