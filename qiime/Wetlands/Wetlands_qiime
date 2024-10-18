@@ -162,6 +162,15 @@ qiime diversity alpha-rarefaction \
   --m-metadata-file wetlands_metadata.tsv\
   --o-visualization alpha-rarefaction.qzv
 
+# changed to 100000 to see closer look at graph
+  qiime diversity alpha-rarefaction \
+  --i-table filtered-table.qza \
+  --i-phylogeny rooted-tree.qza \
+  --p-max-depth 100000 \
+  --m-metadata-file wetlands_metadata.tsv\
+  --o-visualization alpha-rarefaction.qzv
+
+
 # Copy files to computer - write on computer terminal
   scp root@10.19.139.187:/data/wetlands/alpha-rarefaction.qzv .
 
