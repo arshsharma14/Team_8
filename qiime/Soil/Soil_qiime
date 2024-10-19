@@ -181,6 +181,16 @@ qiime diversity alpha-group-significance \
   --i-alpha-diversity core-metrics-results/evenness_vector.qza \
   --m-metadata-file soil_metadata.tsv \
   --o-visualization core-metrics-results/evenness-group-significance.qzv
+
+   qiime diversity alpha-group-significance \
+  --i-alpha-diversity core-metrics-results/observed_features_vector.qza \
+  --m-metadata-file soil_metadata.tsv \
+  --o-visualization core-metrics-results/observed-features-significance.qzv
+
+   qiime diversity alpha-group-significance \
+  --i-alpha-diversity core-metrics-results/shannon_vector.qza \
+  --m-metadata-file soil_metadata.tsv \
+  --o-visualization core-metrics-results/shannon-significance.qzv
   
 # Calculate beta-group-significance
 qiime diversity beta-group-significance \
@@ -190,22 +200,7 @@ qiime diversity beta-group-significance \
   --o-visualization core-metrics-results/unweighted-unifrac-donor-status-significance.qzv \
   --p-pairwise
 
-# Copy files to computer - write on computer terminal
-scp -r root@10.19.139.187:/data/soil/core-metrics-results/ .
-
-# open all qzv files on qiime2.org to view 
-# p < 0.05 = significant --> use for alpha diversity usually same as q value
-# q-value = adjusted p-value --> look at q for beta diversity as q < 0.05 sig
-
-# Alpha: look diversity of each sample and comparing avgs of each other
-# Beta: more sophisticated comparison of multiple samples in one category to another as the reference point 
-# both can be used to compare --> just compare in diff way
-
-
-#PCoA: takes all variables of samples and creates 1 graph of similarity clustered
-
 # Exporting files to human readable form #
-
 mkdir soil_export
 cd soil_export
 
@@ -226,16 +221,30 @@ qiime tools export \
 --input-path ../taxonomy.qza \
 --output-path taxonomy_export 
 
-cd taxonomy_export
 
 qiime tools export \
 --input-path ../rooted-tree.qza \
 --output-path rooted_tree_export 
 
-cd rooted_tree_export
+
+# Copy files to computer - write on computer terminal
+scp -r root@10.19.139.187:/data/soil/core-metrics-results/ .
 
 # Copy files to computer
 scp -r root@10.19.139.187:~/data/soil/soil_export .
+
+# open all qzv files on qiime2.org to view 
+# p < 0.05 = significant --> use for alpha diversity usually same as q value
+# q-value = adjusted p-value --> look at q for beta diversity as q < 0.05 sig
+
+# Alpha: look diversity of each sample and comparing avgs of each other
+# Beta: more sophisticated comparison of multiple samples in one category to another as the reference point 
+# both can be used to compare --> just compare in diff way
+
+
+#PCoA: takes all variables of samples and creates 1 graph of similarity clustered
+
+
 
 
 
