@@ -1,2 +1,3 @@
 - Ask about sampling depth scross datasets and keeping them consistent to avoid sampling bias
 - Ask about merging datasets together and associated code for R analyses
+- How to cite Balantine for wetlands dataset - no paper on it and last year group had no specific reference in their bibliography
