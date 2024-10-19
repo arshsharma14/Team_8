@@ -168,7 +168,7 @@ qiime diversity alpha-rarefaction \
   --i-phylogeny rooted-tree.qza \
   --p-max-depth 100000 \
   --m-metadata-file wetlands_metadata.tsv\
-  --o-visualization alpha-rarefaction.qzv
+  --o-visualization alpha-rarefaction2.qzv
 
 
 # Copy files to computer - write on computer terminal

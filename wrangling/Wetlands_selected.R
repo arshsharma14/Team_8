@@ -69,5 +69,4 @@ category_counts_df_w_cn <- as.data.frame(category_counts_w_cn)
 
 write.table(wetlands_selected, file = "wetlands_metadata.tsv", sep = "\t", row.names = FALSE, col.names = TRUE, quote = FALSE)
 
-
 max(wetlands_selected$cn_ratio, na.rm = TRUE)
