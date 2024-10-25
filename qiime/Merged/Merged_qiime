@@ -1,0 +1,133 @@
+## Merging QIIME2 output files
+
+# source: https://john-quensen.com/tutorials/merging-dada2-results-in-qiime2/
+
+# for each you can input as many files as you need by adding another input line
+
+# Merge tables
+qiime feature-table merge \
+ --i-tables ../soil/filtered-table.qza \
+ --i-tables ../wetlands/filtered-table.qza \
+ --o-merged-table merged_table.qza
+
+# Merge rep-seqs
+qiime feature-table merge-seqs \
+ --i-data ../soil/rep-seqs.qza \
+ --i-data ../wetlands/rep-seqs.qza \
+ --o-merged-data merged_rep-seqs.qza
+
+# Merge taxonomy files
+qiime feature-table merge-taxa \
+  --i-data ../soil/taxonomy.qza \
+  --i-data ../wetlands/taxonomy.qza \
+  --o-merged-data merged-taxonomy.qza
+
+# Merge metadata
+qiime metadata merge \
+  --m-metadata1-file ../soil/soil_metadata.tsv \
+  --m-metadata2-file ../wetlands/wetlands_metadata.tsv \
+  --o-merged-metadata merged_metadata.tsv
+
+qiime metadata tabulate \
+  --m-input-file merged_metadata.tsv.qza \
+  --o-visualization merged_metadata.tsv.qzv
+
+scp root@10.19.139.187:/data/merged/merged_metadata.tsv.qzv  .
+
+ qiime feature-table summarize \
+  --i-table merged_table.qza \
+  --o-visualization merged_table.qzv \
+  --m-sample-metadata-file merged_metadata.tsv.qza 
+
+scp root@10.19.139.187:/data/merged/merged_table.qzv  .
+
+# Generate a tree for phylogenetic diversity analyses
+qiime phylogeny align-to-tree-mafft-fasttree \
+  --i-sequences merged_rep-seqs.qza \
+  --o-alignment aligned-rep-seqs.qza \
+  --o-masked-alignment masked-aligned-rep-seqs.qza \
+  --o-tree unrooted-tree.qza \
+  --o-rooted-tree rooted-tree.qza 
+# creates rooted: show lowest common ancestor LCA & unrooted: does not show LCA
+
+# XXXX - max XXX so chose XXX
+# Alpha-rarefaction --> CHANGE MAX DEPTH according filtered-table
+qiime diversity alpha-rarefaction \
+  --i-table merged_table.qza \
+  --i-phylogeny rooted-tree.qza \
+  --p-max-depth 20000 \
+  --m-metadata-file merged_metadata.tsv.qza \
+  --o-visualization alpha-rarefaction.qzv
+
+qiime diversity core-metrics-phylogenetic \
+  --i-phylogeny rooted-tree.qza \
+  --i-table merged_table.qza \
+  --p-sampling-depth 5086 \
+  --m-metadata-file merged_metadata.tsv.qza \
+  --output-dir core-metrics-results
+  
+# Calculate beta-group-significance
+qiime diversity beta-group-significance \
+  --i-distance-matrix core-metrics-results/unweighted_unifrac_distance_matrix.qza \
+  --m-metadata-file merged_metadata.tsv.qza \
+  --m-metadata-column cn_category \
+  --o-visualization core-metrics-results/unweighted-unifrac-donor-status-significance.qzv \
+  --p-pairwise
+
+# Copy files to computer - write on computer terminal
+  scp root@10.19.139.187:/data/soil/alpha-rarefaction.qzv .
+
+#ABOVE RUNNNING#
+
+# Sequencing depth: how many reads in sample
+  # Sampling depth: what want to set as our rarefaction parameter - any sample with lower amount of reads will be discarded 
+
+# View on qiime2 - observed_feature and barcode-seq --> check sequencing depth fall after plateau 
+# double check sequencing depth on the graph as doing above from table plot 2 steps above this to ensure u good with it
+
+#XXXX - double check on alpha rarefaction
+# Calculate alpha- and beta-diversity metrics
+# sampling-depth - you decide
+
+# Exporting files to human readable form #
+
+## BELOW RUNNING ##
+
+qiime phylogeny align-to-tree-mafft-fasttree \
+  --i-sequences merged_rep-seqs.qza \
+  --o-alignment aligned-rep-seqs.qza \
+  --o-masked-alignment masked-aligned-rep-seqs.qza \
+  --o-tree unrooted-tree.qza \
+  --o-rooted-tree rooted-tree.qza 
+
+mkdir merged_export
+cd merged_export
+
+qiime tools export \
+--input-path ../merged_table.qza \
+--output-path table_export 
+
+cd table_export
+
+biom convert \
+-i feature-table.biom \
+--to-tsv \
+-o feature-table.txt
+
+cd ..
+
+qiime tools export \
+--input-path ../merged-taxonomy.qza \
+--output-path taxonomy_export 
+
+qiime tools export \
+--input-path ../rooted-tree.qza \
+--output-path rooted_tree_export 
+
+## ABOVE RUNNING ##
+
+# Copy files to computer - write on computer terminal
+scp -r root@10.19.139.187:/data/soil/core-metrics-results/ .
+
+# Copy files to computer
+scp -r root@10.19.139.187:~/data/soil/soil_export .
