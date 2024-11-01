@@ -65,3 +65,4 @@ category_counts_df_cn <- as.data.frame(category_counts_cn)
 write.table(soil_select, file = "soil_metadata.tsv", sep = "\t", row.names = FALSE, col.names = TRUE, quote = FALSE)
 
 max(soil_select$cn_ratio, na.rm = TRUE)
+min(soil_select$cn_ratio, na.rm = TRUE)
