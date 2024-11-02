@@ -253,6 +253,49 @@ qiime tools export \
 # Copy files to computer
 scp -r root@10.19.139.187:~/data/wetlands/wetlands_export .
 
+#PICRUST
+
+qiime feature-table filter-features \
+  --i-table filtered-table.qza \
+  --p-min-frequency 5 \
+  --o-filtered-table feature-frequency-filtered-table.qza
+
+qiime picrust2 full-pipeline \
+  --i-table feature-frequency-filtered-table.qza \
+  --i-seq rep-seqs.qza \
+  --output-dir q2-picrust2_output \
+  --p-placement-tool sepp \
+  --p-hsp-method pic \
+  --p-max-nsti 2 \
+  --verbose
+
+# Convert the output files to human readable files
+qiime tools export \
+  --input-path q2-picrust2_output/pathway_abundance.qza \
+  --output-path pathabun_exported
+
+biom convert \
+   -i pathabun_exported/feature-table.biom \
+   -o pathabun_exported/pathway_abundance.tsv \
+   --to-tsv
+
+qiime tools export \
+  --input-path q2-picrust2_output/ko_metagenome.qza \
+  --output-path ko_metagenome_exported
+
+biom convert \
+   -i ko_metagenome_exported/feature-table.biom \
+   -o ko_metagenome_exported/ko_metagenome.tsv \
+   --to-tsv
+
+qiime tools export \
+  --input-path q2-picrust2_output/ec_metagenome.qza \
+  --output-path ec_metagenome_exported
+
+biom convert \
+   -i ec_metagenome_exported/feature-table.biom \
+   -o ec_metagenome_exported/ec_metagenome.tsv \
+   --to-tsv
 
 
 
