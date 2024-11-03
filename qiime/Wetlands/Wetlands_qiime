@@ -297,5 +297,9 @@ biom convert \
    -o ec_metagenome_exported/ec_metagenome.tsv \
    --to-tsv
 
+scp root@10.19.139.187:/data/wetlands/pathabun_exported/pathway_abundance.tsv .
+scp root@10.19.139.187:/data/wetlands/ko_metagenome_exported/ko_metagenome.tsv .
+scp root@10.19.139.187:/data/wetlands/ec_metagenome_exported/ec_metagenome.tsv .
+
 
 

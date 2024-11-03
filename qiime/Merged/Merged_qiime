@@ -151,5 +151,7 @@ biom convert \
    -o ec_metagenome_exported/ec_metagenome.tsv \
    --to-tsv
 
-
+scp root@10.19.139.187:/data/merged/pathabun_exported/pathway_abundance.tsv .
+scp root@10.19.139.187:/data/merged/ko_metagenome_exported/ko_metagenome.tsv .
+scp root@10.19.139.187:/data/merged/ec_metagenome_exported/ec_metagenome.tsv .
 
