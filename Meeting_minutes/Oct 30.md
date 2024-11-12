@@ -1,0 +1,4 @@
+- Agenda
+- Discuss the old proposal with Ritu and see if she has any recomendations on where to improve for the revised proposal
+- Go over the feedback we received on the old proposal
+- Ask about the sampling depth for our QIIME analysis
