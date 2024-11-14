@@ -13,24 +13,24 @@ library(ggh4x)
 
 #### Import files and preparing tables ####
 #Importing the pathway PICrsut2
-abundance_file <- "../qiime/Wetlands/picrust2/pathway_abundance.tsv"
+abundance_file <- "../qiime/Merged/picrust2/pathway_abundance.tsv"
 abundance_data <- fread(abundance_file, sep = "\t", header = TRUE, strip.white = TRUE)
 abundance_data  =as.data.frame(abundance_data)
 
 setnames(abundance_data, old = "#OTU ID", new = "pathway")
 
 #Import your metadata file, no need to filter yet
-metadata <- read_delim("../wrangling/wetlands_metadata.tsv")
+metadata <- read_delim("../wrangling/merged_wrangled_metadata.tsv")
 
 setnames(metadata, old = "#SampleID", new = "sample-id")
 #Example Looking at subject number
 #If you have multiple variants, filter your metadata to include only 2 at a time
 
 #Remove NAs for your column of interest in this case subject
-metadata = metadata[!is.na(metadata$cn_category),]
+metadata = metadata[!is.na(metadata$cn_category_per_dataset),]
 
-# Filter for only "Intermediate" and "High" in cn_category
-metadata <- metadata[metadata$cn_category %in% c("Intermediate", "High"), ]
+# Filter for only "High-Soil" and "High-Wetlands" in cn_category_per_dataset
+metadata <- metadata[metadata$cn_category_per_dataset %in% c("High-Soil", "High-Wetlands"), ]
 
 #Filtering the abundance table to only include samples that are in the filtered metadata
 sample_names = metadata$'sample-id'
@@ -50,7 +50,7 @@ metadata = metadata[metadata$`sample-id` %in% abun_samples,] #making sure the fi
 #### DESEq ####
 #Perform pathway DAA using DESEQ2 method
 abundance_daa_results_df <- pathway_daa(abundance = abundance_data_filtered %>% column_to_rownames("pathway"), 
-                                        metadata = metadata, group = "cn_category", daa_method = "DESeq2")
+                                        metadata = metadata, group = "cn_category_per_dataset", daa_method = "DESeq2")
 
 # Annotate MetaCyc pathway so they are more descriptive
 metacyc_daa_annotated_results_df <- pathway_annotation(pathway = "MetaCyc", 
@@ -71,12 +71,12 @@ colnames(abundance)[1] = "feature"
 abundance_desc = inner_join(abundance,metacyc_daa_annotated_results_df, by = "feature")
 abundance_desc$feature = abundance_desc$description
 #this line will change for each dataset. 34 represents the number of samples in the filtered abundance table
-abundance_desc = abundance_desc[,-c(35:ncol(abundance_desc))] 
+abundance_desc = abundance_desc[,-c(187:ncol(abundance_desc))] 
 
 # Filter tables for category vs category - abundance_desc ; abundance_data_filtered ; metacyc_daa_annotated_results_df
 
 # Generate a heatmap
-heatmap <- pathway_heatmap(abundance = abundance_desc %>% column_to_rownames("feature"), metadata = metadata, group = "cn_category")
+heatmap <- pathway_heatmap(abundance = abundance_desc %>% column_to_rownames("feature"), metadata = metadata, group = "cn_category_per_dataset")
 
 # Generating a bar plot representing log2FC from the custom deseq2 function
 
@@ -86,7 +86,7 @@ heatmap <- pathway_heatmap(abundance = abundance_desc %>% column_to_rownames("fe
 source("DESeq2_function.R")
 
 # Run the function on your own data
-res =  DEseq2_function(abundance_data_filtered, metadata, "cn_category")
+res =  DEseq2_function(abundance_data_filtered, metadata, "cn_category_per_dataset")
 res$feature =rownames(res)
 res_desc = inner_join(res,metacyc_daa_annotated_results_df, by = "feature")
 res_desc = res_desc[, -c(8:13)]
@@ -104,34 +104,16 @@ log2_fold_change <- ggplot(data = sig_res, aes(y = reorder(description, sort(as.
   labs(x = "Log2FoldChange", y="Pathways")
 log2_fold_change
 
-# Filter log2FoldChange values to keep only those > 0.5 or < -0.5
-sig_res_0.5 <- sig_res[sig_res$log2FoldChange > 0.5 | sig_res$log2FoldChange < -0.5, ]
+# Filter log2FoldChange values to keep only those > 1 or < -1
+sig_res_1 <- sig_res[sig_res$log2FoldChange > 1 | sig_res$log2FoldChange < -1, ]
 
-sig_res_0.5 <- sig_res_0.5[order(sig_res_0.5$log2FoldChange),]
-log2_fold_change_0.5 <- ggplot(data = sig_res_0.5, aes(y = reorder(description, sort(as.numeric(log2FoldChange))), x= log2FoldChange, fill = pvalue))+
+sig_res_1 <- sig_res_1[order(sig_res_1$log2FoldChange),]
+log2_fold_change_1 <- ggplot(data = sig_res_1, aes(y = reorder(description, sort(as.numeric(log2FoldChange))), x= log2FoldChange, fill = pvalue))+
   geom_bar(stat = "identity")+ 
   theme_bw()+
   labs(x = "Log2FoldChange", y="Pathways")
-log2_fold_change_0.5
+log2_fold_change_1
 
-# Filter log2FoldChange values to keep only those > 0.25 or < -0.25
-sig_res_0.25 <- sig_res[sig_res$log2FoldChange > 0.25 | sig_res$log2FoldChange < -0.25, ]
-
-sig_res_0.25 <- sig_res_0.25[order(sig_res_0.25$log2FoldChange),]
-log2_fold_change_0.25 <- ggplot(data = sig_res_0.25, aes(y = reorder(description, sort(as.numeric(log2FoldChange))), x= log2FoldChange, fill = pvalue))+
-  geom_bar(stat = "identity")+ 
-  theme_bw()+
-  labs(x = "Log2FoldChange", y="Pathways")
-log2_fold_change_0.25
-
-ggsave("wetlands_ivh_log2.png"
-       , log2_fold_change
-       , height=14, width =12)
-
-ggsave("wetlands_ivh_log2_0.5.png"
-       , log2_fold_change_0.5
-       , height=14, width =12)
-
-ggsave("wetlands_ivh_log2_0.25.png"
-       , log2_fold_change_0.25
+ggsave("merged_high_log2_1.png"
+       , log2_fold_change_1
        , height=14, width =12)
