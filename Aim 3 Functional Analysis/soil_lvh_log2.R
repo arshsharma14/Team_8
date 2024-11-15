@@ -132,3 +132,21 @@ ggsave("soil_lvh_log2_1.png"
        , log2_fold_change_1
        , height=14, width =12)
 
+# Extract the descriptions based on log2FoldChange values
+high_v_low <- sig_res$description[sig_res$log2FoldChange < 0]
+low_v_high <- sig_res$description[sig_res$log2FoldChange > 0]
+
+# Make both vectors the same length by padding with NA
+max_length <- max(length(high_v_low), length(low_v_high))
+length(high_v_low) <- max_length
+length(low_v_high) <- max_length
+
+# Create a new DataFrame called pathways
+pathways2 <- data.frame(
+  High_v_Low = high_v_low,
+  Low_v_High = low_v_high,
+  stringsAsFactors = FALSE
+)
+
+# save as R data 
+save(pathways2, file = "Table/soil_low_v_high_table.RData")

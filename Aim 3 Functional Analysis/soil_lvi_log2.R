@@ -117,3 +117,22 @@ log2_fold_change_0.5
 ggsave("soil_lvi_log2_0.5.png"
        , log2_fold_change_0.5
        , height=14, width =12)
+
+# Extract the descriptions based on log2FoldChange values
+int_v_low <- sig_res$description[sig_res$log2FoldChange < 0]
+low_v_int <- sig_res$description[sig_res$log2FoldChange > 0]
+
+# Make both vectors the same length by padding with NA
+max_length <- max(length(int_v_low), length(low_v_int))
+length(int_v_low) <- max_length
+length(low_v_int) <- max_length
+
+# Create a new DataFrame called pathways
+pathways3 <- data.frame(
+  Int_v_Low = int_v_low,
+  Low_v_Int = low_v_int,
+  stringsAsFactors = FALSE
+)
+
+# save as R data 
+save(pathways3, file = "Table/soil_low_v_int_table.RData")
