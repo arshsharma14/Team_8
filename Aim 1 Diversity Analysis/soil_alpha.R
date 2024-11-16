@@ -4,6 +4,7 @@ library(ape) # importing trees
 library(tidyverse)
 library(vegan)
 library(picante)
+library(ggsignif)
 
 #### Load data ####
 # Change file paths as necessary
@@ -117,16 +118,19 @@ mpt_final <- subset_samples(mpt_filt_nolow_samps, !is.na(cn_category) )
 # t transposes the table to use rarecurve function
 # cex decreases font size
 rarecurve(t(as.data.frame(otu_table(mpt_final))), cex=0.1)
-mpt_rare <- rarefy_even_depth(mpt_final, rngseed = 8, sample.size = XXXX)
 
+## CODE RUN TILL ABOVE AND VERIFIED - WORK ON BELOW 
+## Wetlands has not been run or verified at all yet - need to do still
+
+mpt_rare <- rarefy_even_depth(mpt_final, rngseed = 8, sample.size = 2500)
 
 #### Alpha diversity ######
 plot_richness(mpt_rare) 
 
 plot_richness(mpt_rare, measures = c("Shannon","Chao1")) 
 
-gg_richness <- plot_richness(mpt_rare, x = "subject", measures = c("Shannon","Chao1")) +
-  xlab("Subject ID") +
+gg_richness <- plot_richness(mpt_rare, x = "cn_category", measures = c("Shannon", "Observed", "Fisher")) +
+  xlab("C:N Category") +
   geom_boxplot()
 gg_richness
 
@@ -141,43 +145,61 @@ estimate_richness(mpt_rare)
 # calculate Faith's phylogenetic diversity as PD
 phylo_dist <- pd(t(otu_table(mpt_rare)), phy_tree(mpt_rare),
                  include.root=F) 
-?pd
 
 # add PD to metadata table
 sample_data(mpt_rare)$PD <- phylo_dist$PD
 
 # plot any metadata category against the PD
-plot.pd <- ggplot(sample_data(mpt_rare), aes(subject, PD)) + 
+plot.pd <- ggplot(sample_data(mpt_rare), aes(cn_category, PD)) + 
   geom_boxplot() +
-  xlab("Subject ID") +
+  xlab("C:N Category") +
   ylab("Phylogenetic Diversity")
 
 # view plot
 plot.pd
 
+# Need to extract information
+alphadiv <- estimate_richness(mpt_rare)
+samp_dat <- sample_data(mpt_rare)
+samp_dat_wdiv <- data.frame(samp_dat, alphadiv)
 
-#### Taxonomy bar plots ####
+View(samp_dat_wdiv)
 
-# Plot bar plot of taxonomy
-plot_bar(mpt_rare, fill="Phylum") 
+allCounts <- as.vector(otu_table(mpt_rare))
+allCounts <- allCounts[allCounts>0]
+hist(allCounts)
+hist(log(allCounts))
 
-# Convert to relative abundance
-mpt_RA <- transform_sample_counts(mpt_rare, function(x) x/sum(x))
+ggplot(samp_dat_wdiv, aes(x=`cn_category`, y=Shannon)) +
+  geom_boxplot() +
+  geom_point()
 
-# To remove black bars, "glom" by phylum first where phylum is taxonomic group of interest
-mpt_phylum <- tax_glom(mpt_RA, taxrank = "Phylum", NArm=FALSE)
+kruskal.test(Shannon ~ `cn_category`, data = samp_dat_wdiv)
+kruskal.test(Observed ~ `cn_category`, data = samp_dat_wdiv)
+kruskal.test(Fisher ~ `cn_category`, data = samp_dat_wdiv)
 
-plot_bar(mpt_phylum, fill="Phylum") + 
-  facet_wrap(.~subject, scales = "free_x")
+lm_ob_vs_site_log <- lm(log(Shannon) ~ `cn_category`, data=samp_dat_wdiv)
+anova_ob_vs_site_log <- aov(lm_ob_vs_site_log)
+summary(anova_ob_vs_site_log)
+TukeyHSD(anova_ob_vs_site_log)
 
-gg_taxa <- plot_bar(mpt_phylum, fill="Phylum") + 
-  facet_wrap(.~subject, scales = "free_x")
-gg_taxa
+# Mapping the significance to a ggplot
+Shannon <- ggplot(samp_dat_wdiv, aes(x=`cn_category`, y=Shannon)) +
+  geom_boxplot() +
+  geom_signif(comparisons = list(c("Low","High"), c("Low", "Intermediate")),
+              y_position = c(6, 6.5),
+              annotations = c("0.0002","0.0007"))
+Shannon
 
-ggsave("plot_taxonomy.png"
-       , gg_taxa
-       , height=8, width =12)
+lm_ob_vs_site_log_pd <- lm(log(PD) ~ `cn_category`, data=samp_dat_wdiv)
+anova_ob_vs_site_log_pd <- aov(lm_ob_vs_site_log_pd)
+summary(anova_ob_vs_site_log_pd)
+TukeyHSD(anova_ob_vs_site_log_pd)
 
-
-
+PD <- Shannon <- ggplot(samp_dat_wdiv, aes(x=`cn_category`, y=PD)) +
+  geom_boxplot() +
+  geom_signif(comparisons = list(c("Low","High"), c("Low", "Intermediate"), c("Intermediate", "High")),
+              y_position = c(70, 65, 60),
+              annotations = c("0.0000000","0.004", "0.0007"))
+PD
 
