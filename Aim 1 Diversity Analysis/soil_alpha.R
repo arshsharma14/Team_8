@@ -69,39 +69,6 @@ sample_data(mpt)
 tax_table(mpt)
 phy_tree(mpt)
 
-
-#### Accessor functions ####
-# These functions allow you to see or summarise data
-
-# If we look at sample variables and decide we only want some variables, we can view them like so:
-sample_variables(mpt)
-# colnames(sample_data(atamaca))
-get_variable(mpt, c("cn_category")) # equivalent to "select" in tidyverse
-
-## Let's say we want to filter OTU table by sample. 
-# We can first view sample names:
-sample_names(mpt)
-# How many samples do we have?
-nsamples(mpt)
-# What is the sum of reads in each sample?
-sample_sums(mpt)
-# Save the sample names of the 3 samples with the most reads
-getsamps <- names(sort(sample_sums(mpt), decreasing = TRUE)[1:3])
-# filter to see taxa abundances for each sample
-get_taxa(mpt, getsamps) 
-
-## Conversely, let's say we want to compare OTU abundance of most abundant OTU across samples
-# Look at taxa names
-taxa_names(mpt)
-# How many taxa do we have? (ASVs)
-ntaxa(mpt)
-# What is the total read count for each taxa?
-taxa_sums(mpt)
-# Let's find the top 3 most abundant taxa
-gettaxa <- names(sort(taxa_sums(mpt), decreasing = TRUE)[1:3] )
-get_sample(mpt, gettaxa)
-
-
 ######### ANALYZE ##########
 # Remove non-bacterial sequences, if any
 mpt_filt <- subset_taxa(mpt,  Domain == "d__Bacteria" & Class!="c__Chloroplast" & Family !="f__Mitochondria")
@@ -117,29 +84,11 @@ mpt_final <- subset_samples(mpt_filt_nolow_samps, !is.na(cn_category) )
 # to set rngseed the same number each time
 # t transposes the table to use rarecurve function
 # cex decreases font size
-rarecurve(t(as.data.frame(otu_table(mpt_final))), cex=0.1)
-
-## CODE RUN TILL ABOVE AND VERIFIED - WORK ON BELOW 
-## Wetlands has not been run or verified at all yet - need to do still
+# rarecurve(t(as.data.frame(otu_table(mpt_final))), cex=0.1)
 
 mpt_rare <- rarefy_even_depth(mpt_final, rngseed = 8, sample.size = 2500)
 
 #### Alpha diversity ######
-plot_richness(mpt_rare) 
-
-plot_richness(mpt_rare, measures = c("Shannon","Chao1")) 
-
-gg_richness <- plot_richness(mpt_rare, x = "cn_category", measures = c("Shannon", "Observed", "Fisher")) +
-  xlab("C:N Category") +
-  geom_boxplot()
-gg_richness
-
-ggsave(filename = "plot_richness.png"
-       , gg_richness
-       , height=4, width=6)
-
-estimate_richness(mpt_rare)
-
 # phylogenetic diversity
 
 # calculate Faith's phylogenetic diversity as PD
@@ -149,47 +98,15 @@ phylo_dist <- pd(t(otu_table(mpt_rare)), phy_tree(mpt_rare),
 # add PD to metadata table
 sample_data(mpt_rare)$PD <- phylo_dist$PD
 
-# plot any metadata category against the PD
-plot.pd <- ggplot(sample_data(mpt_rare), aes(cn_category, PD)) + 
-  geom_boxplot() +
-  xlab("C:N Category") +
-  ylab("Phylogenetic Diversity")
-
-# view plot
-plot.pd
-
 # Need to extract information
 alphadiv <- estimate_richness(mpt_rare)
 samp_dat <- sample_data(mpt_rare)
 samp_dat_wdiv <- data.frame(samp_dat, alphadiv)
 
-View(samp_dat_wdiv)
-
-allCounts <- as.vector(otu_table(mpt_rare))
-allCounts <- allCounts[allCounts>0]
-hist(allCounts)
-hist(log(allCounts))
-
-ggplot(samp_dat_wdiv, aes(x=`cn_category`, y=Shannon)) +
-  geom_boxplot() +
-  geom_point()
-
 kruskal.test(Shannon ~ `cn_category`, data = samp_dat_wdiv)
 kruskal.test(Observed ~ `cn_category`, data = samp_dat_wdiv)
 kruskal.test(Fisher ~ `cn_category`, data = samp_dat_wdiv)
-
-lm_ob_vs_site_log <- lm(log(Shannon) ~ `cn_category`, data=samp_dat_wdiv)
-anova_ob_vs_site_log <- aov(lm_ob_vs_site_log)
-summary(anova_ob_vs_site_log)
-TukeyHSD(anova_ob_vs_site_log)
-
-# Mapping the significance to a ggplot
-Shannon <- ggplot(samp_dat_wdiv, aes(x=`cn_category`, y=Shannon)) +
-  geom_boxplot() +
-  geom_signif(comparisons = list(c("Low","High"), c("Low", "Intermediate")),
-              y_position = c(6, 6.5),
-              annotations = c("0.0002","0.0007"))
-Shannon
+kruskal.test(PD ~ `cn_category`, data = samp_dat_wdiv)
 
 lm_ob_vs_site_log_pd <- lm(log(PD) ~ `cn_category`, data=samp_dat_wdiv)
 anova_ob_vs_site_log_pd <- aov(lm_ob_vs_site_log_pd)
@@ -202,4 +119,141 @@ PD <- Shannon <- ggplot(samp_dat_wdiv, aes(x=`cn_category`, y=PD)) +
               y_position = c(70, 65, 60),
               annotations = c("0.0000000","0.004", "0.0007"))
 PD
+
+# DESeq #
+library(DESeq2)
+
+mpt_plus1 <- transform_sample_counts(mpt_final, function(x) x+1)
+mpt_deseq <- phyloseq_to_deseq2(mpt_plus1, ~`cn_category`)
+DESEQ_mpt <- DESeq(mpt_deseq)
+
+## Low vs High ##
+res_lvh <- results(DESEQ_mpt, tidy=TRUE, 
+               contrast = c("cn_category","Low","High"))
+
+vol_plot_lvh <- res_lvh %>%
+  mutate(significant = padj<0.01 & abs(log2FoldChange)>2) %>%
+  ggplot() +
+  geom_point(aes(x=log2FoldChange, y=-log10(padj), col=significant))
+vol_plot_lvh
+
+sigASVs_lvh <- res_lvh %>% 
+  filter(padj<0.01 & abs(log2FoldChange)>2) %>%
+  dplyr::rename(ASV=row)
+
+sigASVs_vec_lvh <- sigASVs_lvh %>%
+  pull(ASV)
+
+mpt_DESeq_lvh <- prune_taxa(sigASVs_vec_lvh,mpt_final)
+sigASVs_lvh <- tax_table(mpt_DESeq_lvh) %>% as.data.frame() %>%
+  rownames_to_column(var="ASV") %>%
+  right_join(sigASVs_lvh) %>%
+  arrange(log2FoldChange) %>%
+  mutate(Genus = make.unique(Genus)) %>%
+  mutate(Genus = factor(Genus, levels=unique(Genus)))
+
+log2_lvh <- ggplot(sigASVs_lvh) +
+  geom_bar(aes(x=Genus, y=log2FoldChange), stat="identity")+
+  geom_errorbar(aes(x=Genus, ymin=log2FoldChange-lfcSE, ymax=log2FoldChange+lfcSE)) +
+  theme(axis.text.x = element_text(angle=90, hjust=1, vjust=0.5))
+log2_lvh
+
+# Count the number of positive log2FoldChange values
+positive_count_lvh <- sum(sigASVs_lvh$log2FoldChange > 0)
+
+# Count the number of negative log2FoldChange values
+negative_count_lvh <- sum(sigASVs_lvh$log2FoldChange < 0)
+
+# Create a new data frame 
+count_lvh <- data.frame(
+  log2FoldChange = c("Positive", "Negative"),
+  Count = c(positive_count_lvh, negative_count_lvh)
+)
+
+## Int vs High ##
+res_ivh <- results(DESEQ_mpt, tidy=TRUE, 
+                   contrast = c("cn_category","Intermediate","High"))
+
+vol_plot_ivh <- res_ivh %>%
+  mutate(significant = padj<0.01 & abs(log2FoldChange)>2) %>%
+  ggplot() +
+  geom_point(aes(x=log2FoldChange, y=-log10(padj), col=significant))
+vol_plot_ivh
+
+sigASVs_ivh <- res_ivh %>% 
+  filter(padj<0.01 & abs(log2FoldChange)>2) %>%
+  dplyr::rename(ASV=row)
+
+sigASVs_vec_ivh <- sigASVs_ivh %>%
+  pull(ASV)
+
+mpt_DESeq_ivh <- prune_taxa(sigASVs_vec_ivh,mpt_final)
+sigASVs_ivh <- tax_table(mpt_DESeq_ivh) %>% as.data.frame() %>%
+  rownames_to_column(var="ASV") %>%
+  right_join(sigASVs_ivh) %>%
+  arrange(log2FoldChange) %>%
+  mutate(Genus = make.unique(Genus)) %>%
+  mutate(Genus = factor(Genus, levels=unique(Genus)))
+
+log2_ivh <- ggplot(sigASVs_ivh) +
+  geom_bar(aes(x=Genus, y=log2FoldChange), stat="identity")+
+  geom_errorbar(aes(x=Genus, ymin=log2FoldChange-lfcSE, ymax=log2FoldChange+lfcSE)) +
+  theme(axis.text.x = element_text(angle=90, hjust=1, vjust=0.5))
+log2_ivh
+
+# Count the number of positive log2FoldChange values
+positive_count_ivh <- sum(sigASVs_ivh$log2FoldChange > 0)
+
+# Count the number of negative log2FoldChange values
+negative_count_ivh <- sum(sigASVs_ivh$log2FoldChange < 0)
+
+# Create a new data frame 
+count_ivh <- data.frame(
+  log2FoldChange = c("Positive", "Negative"),
+  Count = c(positive_count_ivh, negative_count_ivh)
+)
+
+## Low vs Int
+res_lvi <- results(DESEQ_mpt, tidy=TRUE, 
+                   contrast = c("cn_category","Low","Intermediate"))
+
+vol_plot_lvi <- res_lvi %>%
+  mutate(significant = padj<0.01 & abs(log2FoldChange)>2) %>%
+  ggplot() +
+  geom_point(aes(x=log2FoldChange, y=-log10(padj), col=significant))
+vol_plot_lvi
+
+sigASVs_lvi <- res_lvi %>% 
+  filter(padj<0.01 & abs(log2FoldChange)>2) %>%
+  dplyr::rename(ASV=row)
+
+sigASVs_vec_lvi <- sigASVs_lvi %>%
+  pull(ASV)
+
+mpt_DESeq_lvi <- prune_taxa(sigASVs_vec_lvi,mpt_final)
+sigASVs_lvi <- tax_table(mpt_DESeq_lvi) %>% as.data.frame() %>%
+  rownames_to_column(var="ASV") %>%
+  right_join(sigASVs_lvi) %>%
+  arrange(log2FoldChange) %>%
+  mutate(Genus = make.unique(Genus)) %>%
+  mutate(Genus = factor(Genus, levels=unique(Genus)))
+
+log2_lvi <- ggplot(sigASVs_lvi) +
+  geom_bar(aes(x=Genus, y=log2FoldChange), stat="identity")+
+  geom_errorbar(aes(x=Genus, ymin=log2FoldChange-lfcSE, ymax=log2FoldChange+lfcSE)) +
+  theme(axis.text.x = element_text(angle=90, hjust=1, vjust=0.5))
+log2_lvi
+
+# Count the number of positive log2FoldChange values
+positive_count_lvi <- sum(sigASVs_lvi$log2FoldChange > 0)
+
+# Count the number of negative log2FoldChange values
+negative_count_lvi <- sum(sigASVs_lvi$log2FoldChange < 0)
+
+# Create a new data frame 
+count_lvi <- data.frame(
+  log2FoldChange = c("Positive", "Negative"),
+  Count = c(positive_count_lvi, negative_count_lvi)
+)
+
 
