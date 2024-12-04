@@ -90,63 +90,47 @@ res =  DEseq2_function(abundance_data_filtered, metadata, "cn_category")
 res$feature =rownames(res)
 res_desc = inner_join(res,metacyc_daa_annotated_results_df, by = "feature")
 res_desc = res_desc[, -c(8:13)]
-View(res_desc)
 
 # Filter to only include significant pathways
 sig_res = res_desc %>%
   filter(pvalue < 0.05)
 
-# You can also filter by Log2fold change
-sig_res <- sig_res[order(sig_res$log2FoldChange),]
-log2_fold_change <- ggplot(data = sig_res, aes(y = reorder(description, sort(as.numeric(log2FoldChange))), x= log2FoldChange, fill = pvalue))+
-  geom_bar(stat = "identity")+ 
-  theme_bw()+
-  labs(x = "Log2FoldChange", y="Pathways")
-log2_fold_change
-
-# Filter log2FoldChange values to keep only those > 0.5 or < -0.5
-sig_res_0.5 <- sig_res[sig_res$log2FoldChange > 0.5 | sig_res$log2FoldChange < -0.5, ]
-
-sig_res_0.5 <- sig_res_0.5[order(sig_res_0.5$log2FoldChange),]
-log2_fold_change_0.5 <- ggplot(data = sig_res_0.5, aes(y = reorder(description, sort(as.numeric(log2FoldChange))), x= log2FoldChange, fill = pvalue))+
-  geom_bar(stat = "identity")+ 
-  theme_bw()+
-  labs(x = "Log2FoldChange", y="Pathways")
-log2_fold_change_0.5
-
 # Filter log2FoldChange values to keep only those > 1 or < -1
 sig_res_1 <- sig_res[sig_res$log2FoldChange > 1 | sig_res$log2FoldChange < -1, ]
+sig_res_1$log2FoldChange <- sig_res_1$log2FoldChange * -1
 
 sig_res_1 <- sig_res_1[order(sig_res_1$log2FoldChange),]
 log2_fold_change_1 <- ggplot(data = sig_res_1, aes(y = reorder(description, sort(as.numeric(log2FoldChange))), x= log2FoldChange, fill = pvalue))+
   geom_bar(stat = "identity")+ 
   theme_bw()+
-  labs(x = "Log2FoldChange", y="Pathways")
+  labs(
+    title = "Soil High vs Low", 
+    x = "Log2 Fold Change", 
+    y = "Pathways",
+    fill = expression(bold("P Value"))  
+  ) +
+  theme(
+    plot.title = element_text(size = 22, face = "bold"),  
+    axis.text = element_text(size = 14),                  
+    axis.title = element_text(size = 18, face = "bold")
+  )
 log2_fold_change_1
 
-ggsave("soil_lvh_log2_0.5.png"
-       , log2_fold_change_0.5
-       , height=14, width =12)
 
 ggsave("soil_lvh_log2_1.png"
        , log2_fold_change_1
-       , height=14, width =12)
+       , height=8, width =12)
 
-# Extract the descriptions based on log2FoldChange values
-high_v_low <- sig_res$description[sig_res$log2FoldChange < 0]
-low_v_high <- sig_res$description[sig_res$log2FoldChange > 0]
+# Count the number of positive log2FoldChange values
+positive_count <- sum(sig_res_1$log2FoldChange > 0)
 
-# Make both vectors the same length by padding with NA
-max_length <- max(length(high_v_low), length(low_v_high))
-length(high_v_low) <- max_length
-length(low_v_high) <- max_length
+# Count the number of negative log2FoldChange values
+negative_count <- sum(sig_res_1$log2FoldChange < 0)
 
-# Create a new DataFrame called pathways
-pathways2 <- data.frame(
-  High_v_Low = high_v_low,
-  Low_v_High = low_v_high,
-  stringsAsFactors = FALSE
+# Create a new data frame 
+count <- data.frame(
+  log2FoldChange = c("Positive", "Negative"),
+  Count = c(positive_count, negative_count)
 )
+count
 
-# save as R data 
-save(pathways2, file = "Table/soil_low_v_high_table.RData")

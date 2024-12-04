@@ -173,7 +173,7 @@ gg_box_bc <- ggplot(bray_dist_long, aes(x = Group, y = Distance, fill = Group)) 
        x = "Sample Group (cn_category_per_dataset)",
        y = "Beta Diversity (Bray-Curtis)") +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) 
 
 # Box Plot for Unweighted UniFrac Distance Matrix
 gg_box_uu <- ggplot(unweighted_unifrac_long, aes(x = Group, y = Distance, fill = Group)) +
@@ -216,18 +216,33 @@ gg_box_wu_s <- ggplot(weighted_unifrac_long, aes(x = Group, y = Distance, fill =
        x = "C:N category",
        y = "Beta Diversity (Weighted UniFrac)") +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+    plot.title = element_text(size = 20, face = "bold"),  
+    axis.text = element_text(size = 14),                  
+    axis.title = element_text(size = 18, face = "bold"),
+    legend.text = element_text(size = 16),                
+    legend.title = element_text(size = 18, face = "bold")
+  ) +
   geom_signif(comparisons = list(
     c("High-Soil", "High-Wetlands"), 
     c("Intermediate-Soil", "Intermediate-Wetlands"), 
     c("Low-Soil", "Low-Wetlands")),
     annotations = "****",
-    y_position = c(0.13, 0.13, 0.13),  # Setting the height for the bars
+    y_position = c(0.125, 0.125, 0.125),  # Setting the height for the bars
     tip_length = 0.01,
     textsize = 5)
 
 # Print the plot
 print(gg_box_wu_s)
+
+ggsave("merged_wu.png"
+       , gg_box_wu_s
+       , height=8, width =12)
+
+# Extract the fill colors from the merged plot
+merged_colors <- ggplot_build(gg_box_wu_s)$data[[1]]$fill
+unique_colors <- unique(merged_colors)
+print(unique_colors)
 
 # DESeq #
 library(DESeq2)

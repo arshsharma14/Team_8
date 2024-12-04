@@ -90,29 +90,10 @@ res =  DEseq2_function(abundance_data_filtered, metadata, "cn_category_per_datas
 res$feature =rownames(res)
 res_desc = inner_join(res,metacyc_daa_annotated_results_df, by = "feature")
 res_desc = res_desc[, -c(8:13)]
-View(res_desc)
 
 # Filter to only include significant pathways
 sig_res = res_desc %>%
   filter(pvalue < 0.05)
-
-# You can also filter by Log2fold change
-sig_res <- sig_res[order(sig_res$log2FoldChange),]
-log2_fold_change <- ggplot(data = sig_res, aes(y = reorder(description, sort(as.numeric(log2FoldChange))), x= log2FoldChange, fill = pvalue))+
-  geom_bar(stat = "identity")+ 
-  theme_bw()+
-  labs(x = "Log2FoldChange", y="Pathways")
-log2_fold_change
-
-# Filter log2FoldChange values to keep only those > 0.5 or < -0.5
-sig_res_0.5 <- sig_res[sig_res$log2FoldChange > 0.5 | sig_res$log2FoldChange < -0.5, ]
-
-sig_res_0.5 <- sig_res_0.5[order(sig_res_0.5$log2FoldChange),]
-log2_fold_change_0.5 <- ggplot(data = sig_res_0.5, aes(y = reorder(description, sort(as.numeric(log2FoldChange))), x= log2FoldChange, fill = pvalue))+
-  geom_bar(stat = "identity")+ 
-  theme_bw()+
-  labs(x = "Log2FoldChange", y="Pathways")
-log2_fold_change_0.5
 
 # Filter log2FoldChange values to keep only those > 1 or < -1
 sig_res_1 <- sig_res[sig_res$log2FoldChange > 1 | sig_res$log2FoldChange < -1, ]
@@ -121,23 +102,33 @@ sig_res_1 <- sig_res_1[order(sig_res_1$log2FoldChange),]
 log2_fold_change_1 <- ggplot(data = sig_res_1, aes(y = reorder(description, sort(as.numeric(log2FoldChange))), x= log2FoldChange, fill = pvalue))+
   geom_bar(stat = "identity")+ 
   theme_bw()+
-  labs(x = "Log2FoldChange", y="Pathways")
+  labs(
+    title = "Low-Soil vs Low-Wetlands", 
+    x = "Log2 Fold Change", 
+    y = "Pathways",
+    fill = expression(bold("P Value"))  
+  ) +
+  theme(
+    plot.title = element_text(size = 22, face = "bold"),  
+    axis.text = element_text(size = 14),                  
+    axis.title = element_text(size = 18, face = "bold")
+  )
 log2_fold_change_1
-
-# Filter log2FoldChange values to keep only those > 1 or < -5
-sig_res_5 <- sig_res[sig_res$log2FoldChange > 1 | sig_res$log2FoldChange < -5, ]
-
-sig_res_5 <- sig_res_5[order(sig_res_5$log2FoldChange),]
-log2_fold_change_5 <- ggplot(data = sig_res_5, aes(y = reorder(description, sort(as.numeric(log2FoldChange))), x= log2FoldChange, fill = pvalue))+
-  geom_bar(stat = "identity")+ 
-  theme_bw()+
-  labs(x = "Log2FoldChange", y="Pathways")
-log2_fold_change_5
-
-ggsave("merged_low_log2_5.png"
-       , log2_fold_change_5
-       , height=14, width =12)
 
 ggsave("merged_low_log2_1.png"
        , log2_fold_change_1
-       , height=14, width =12)
+       , height=24, width =14)
+
+# Count the number of positive log2FoldChange values
+positive_count <- sum(sig_res_1$log2FoldChange > 0)
+
+# Count the number of negative log2FoldChange values
+negative_count <- sum(sig_res_1$log2FoldChange < 0)
+
+# Create a new data frame 
+count <- data.frame(
+  log2FoldChange = c("Positive", "Negative"),
+  Count = c(positive_count, negative_count)
+)
+count
+

@@ -113,12 +113,94 @@ anova_ob_vs_site_log_pd <- aov(lm_ob_vs_site_log_pd)
 summary(anova_ob_vs_site_log_pd)
 TukeyHSD(anova_ob_vs_site_log_pd)
 
-PD <- Shannon <- ggplot(samp_dat_wdiv, aes(x=`cn_category`, y=PD)) +
+PD <- ggplot(samp_dat_wdiv, aes(x=`cn_category`, y=PD, fill = cn_category)) +
   geom_boxplot() +
+  labs(x="C:N Category", y="Faith's PD", title="Wetlands", fill = expression(bold("C:N Category"))) +
+  theme(
+    plot.title = element_text(size = 25, face = "bold"),  
+    axis.text = element_text(size = 25),                  
+    axis.title = element_text(size = 25, face = "bold"),
+    legend.text = element_text(size = 20),                
+    legend.title = element_text(size = 25, face = "bold")
+  ) +
   geom_signif(comparisons = list(c("Low","High")),
-              y_position = c(180),
-              annotations = c("0.002"))
+              y_position = c(175),
+              annotations = c("**"),
+              textsize = 8) + 
+  scale_fill_manual(values = c("Low" = "#619CFF", 
+                               "Intermediate" = "#00BA38", 
+                               "High" = "#F8766D"))
 PD
+
+lm_ob_vs_site_log_shannon <- lm(log(Shannon) ~ `cn_category`, data=samp_dat_wdiv)
+anova_ob_vs_site_log_shannon <- aov(lm_ob_vs_site_log_shannon)
+summary(anova_ob_vs_site_log_shannon)
+TukeyHSD(anova_ob_vs_site_log_shannon)
+
+Shannon <- ggplot(samp_dat_wdiv, aes(x=`cn_category`, y=Shannon, fill = cn_category)) +
+  geom_boxplot() + 
+  labs(x="C:N Category", y="Shannon Evenness", title="Wetlands", fill = expression(bold("C:N Category"))) +
+  theme(
+    plot.title = element_text(size = 25, face = "bold"),  
+    axis.text = element_text(size = 25),                  
+    axis.title = element_text(size = 25, face = "bold"),
+    legend.text = element_text(size = 20),                
+    legend.title = element_text(size = 25, face = "bold")
+  ) +
+  scale_fill_manual(values = c("Low" = "#619CFF", 
+                               "Intermediate" = "#00BA38", 
+                               "High" = "#F8766D"))
+Shannon
+
+ggsave("wetlands_PD.png"
+       , PD
+       , height=8, width =12)
+
+ggsave("wetlands_shannon.png"
+       , Shannon
+       , height=8, width =12)
+
+PD2 <- ggplot(samp_dat_wdiv, aes(x=`cn_category`, y=PD, fill = cn_category)) +
+  geom_boxplot() +
+  labs(x="C:N Category", y="Faith's PD", title="Wetlands Soil", fill = expression(bold("C:N Category"))) +
+  theme(
+    plot.title = element_text(size = 35, face = "bold"),  
+    axis.text = element_text(size = 25),                  
+    axis.title = element_text(size = 25, face = "bold"),
+    legend.text = element_text(size = 20),                
+    legend.title = element_text(size = 25, face = "bold")
+  ) +
+  geom_signif(comparisons = list(c("Low","High")),
+              y_position = c(175),
+              annotations = c("**"),
+              textsize = 8) + 
+  scale_fill_manual(values = c("Low" = "#619CFF", 
+                               "Intermediate" = "#00BA38", 
+                               "High" = "#F8766D"))
+PD2
+
+Shannon2 <- ggplot(samp_dat_wdiv, aes(x=`cn_category`, y=Shannon, fill = cn_category)) +
+  geom_boxplot() + 
+  labs(x="C:N Category", y="Shannon Evenness", title="Wetlands Soil", fill = expression(bold("C:N Category"))) +
+  theme(
+    plot.title = element_text(size = 35, face = "bold"),  
+    axis.text = element_text(size = 25),                  
+    axis.title = element_text(size = 25, face = "bold"),
+    legend.text = element_text(size = 20),                
+    legend.title = element_text(size = 25, face = "bold")
+  ) +
+  scale_fill_manual(values = c("Low" = "#619CFF", 
+                               "Intermediate" = "#00BA38", 
+                               "High" = "#F8766D"))
+Shannon2
+
+ggsave("wetlands_PD2.png"
+       , PD2
+       , height=8, width =12)
+
+ggsave("wetlands_shannon2.png"
+       , Shannon2
+       , height=8, width =12)
 
 
 # DESeq #
