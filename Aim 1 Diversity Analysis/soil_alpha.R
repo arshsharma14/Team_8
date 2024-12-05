@@ -89,6 +89,9 @@ mpt_final <- subset_samples(mpt_filt_nolow_samps, !is.na(cn_category) )
 mpt_rare <- rarefy_even_depth(mpt_final, rngseed = 8, sample.size = 2500)
 plot_richness(mpt_rare)
 
+save(mpt_final, file = "soil_final.RData")
+save(mpt_rare, file = "soil_rare.RData")
+
 #### Alpha diversity ######
 # phylogenetic diversity
 

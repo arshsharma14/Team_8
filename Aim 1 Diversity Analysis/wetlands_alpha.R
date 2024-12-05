@@ -87,6 +87,8 @@ mpt_final <- subset_samples(mpt_filt_nolow_samps, !is.na(cn_category) )
 # rarecurve(t(as.data.frame(otu_table(mpt_final))), cex=0.1)
 mpt_rare <- rarefy_even_depth(mpt_final, rngseed = 8, sample.size = 20000)
 
+save(mpt_final, file = "wetlands_final.RData")
+save(mpt_rare, file = "wetlands_rare.RData")
 
 #### Alpha diversity ######
 # phylogenetic diversity
@@ -338,5 +340,6 @@ count_lvi <- data.frame(
   log2FoldChange = c("Positive", "Negative"),
   Count = c(positive_count_lvi, negative_count_lvi)
 )
+
 
 
