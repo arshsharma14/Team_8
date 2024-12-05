@@ -1,10 +1,12 @@
 # Load in Libraries
+install.packages("ggthemes")
 library(phyloseq)
 library(ape) # importing trees
 library(tidyverse)
 library(vegan)
 library(picante)
 library(ggsignif)
+library(ggthemes)
 
 #### Load data ####
 # Change file paths as necessary
@@ -117,16 +119,18 @@ anova_ob_vs_site_log_pd <- aov(lm_ob_vs_site_log_pd)
 summary(anova_ob_vs_site_log_pd)
 TukeyHSD(anova_ob_vs_site_log_pd)
 
+samp_dat_wdiv$cn_category <- factor(samp_dat_wdiv$cn_category, levels = c("Low", "Intermediate", "High"))
+
 PD <- ggplot(samp_dat_wdiv, aes(x=`cn_category`, y=PD, fill = cn_category)) +
   geom_boxplot() +
-  labs(x="C:N Category", y="Faith's PD", title="Soil", fill = expression(bold("C:N Category"))) +
+  labs(x="C:N Category", y="Faith's PD", fill = expression(bold("C:N Category"))) +
+  theme_minimal() +
   theme(
     plot.title = element_text(size = 25, face = "bold"),  
     axis.text = element_text(size = 25),                  
     axis.title = element_text(size = 25, face = "bold"),
     legend.text = element_text(size = 20),                
-    legend.title = element_text(size = 25, face = "bold")
-  ) +
+    legend.title = element_text(size = 25, face = "bold")) +
   geom_signif(comparisons = list(c("Low","High"), c("Low", "Intermediate"), c("Intermediate", "High")),
               y_position = c(70, 65, 60),
               annotations = c("****","**", "***"),
@@ -134,7 +138,10 @@ PD <- ggplot(samp_dat_wdiv, aes(x=`cn_category`, y=PD, fill = cn_category)) +
   scale_fill_manual(values = c("Low" = "#619CFF", 
                                "Intermediate" = "#00BA38", 
                                "High" = "#F8766D"))
+
 PD
+
+samp_dat_wdiv$cn_category <- factor(samp_dat_wdiv$cn_category, levels = c("Low", "Intermediate", "High"))
 
 lm_ob_vs_site_log_shannon <- lm(log(Shannon) ~ `cn_category`, data=samp_dat_wdiv)
 anova_ob_vs_site_log_shannon <- aov(lm_ob_vs_site_log_shannon)
@@ -144,6 +151,7 @@ TukeyHSD(anova_ob_vs_site_log_shannon)
 Shannon <- ggplot(samp_dat_wdiv, aes(x=`cn_category`, y=Shannon, fill = cn_category)) +
   geom_boxplot() +
   labs(x="C:N Category", y="Shannon Evenness", title="Soil", fill = expression(bold("C:N Category"))) +
+  theme_minimal() +
   theme(
     plot.title = element_text(size = 25, face = "bold"),  
     axis.text = element_text(size = 25),                  
