@@ -119,7 +119,7 @@ samp_dat_wdiv$cn_category <- factor(samp_dat_wdiv$cn_category, levels = c("Low",
 
 PD <- ggplot(samp_dat_wdiv, aes(x=`cn_category`, y=PD, fill = cn_category)) +
   geom_boxplot() +
-  labs(x="C:N Category", y="Faith's PD", title="Wetlands", fill = expression(bold("C:N Category"))) +
+  labs(x="C:N Category", y="Faith's PD",fill = expression(bold("C:N Category"))) +
   theme_minimal() +
   theme(
     plot.title = element_text(size = 25, face = "bold"),  
@@ -132,9 +132,10 @@ PD <- ggplot(samp_dat_wdiv, aes(x=`cn_category`, y=PD, fill = cn_category)) +
               y_position = c(175),
               annotations = c("**"),
               textsize = 8) + 
-  scale_fill_manual(values = c("Low" = "#619CFF", 
-                               "Intermediate" = "#00BA38", 
-                               "High" = "#F8766D"))
+  scale_fill_manual(values = c("Low" = "#E69F00", 
+                               "Intermediate" = "#56B4E9", 
+                               "High" = "#009E73"))
+
 PD
 
 lm_ob_vs_site_log_shannon <- lm(log(Shannon) ~ `cn_category`, data=samp_dat_wdiv)
@@ -144,7 +145,7 @@ TukeyHSD(anova_ob_vs_site_log_shannon)
 
 Shannon <- ggplot(samp_dat_wdiv, aes(x=`cn_category`, y=Shannon, fill = cn_category)) +
   geom_boxplot() + 
-  labs(x="C:N Category", y="Shannon Evenness", title="Wetlands", fill = expression(bold("C:N Category"))) +
+  labs(x="C:N Category", y="Shannon Evenness", fill = expression(bold("C:N Category"))) +
   theme_minimal() +
   theme(
     plot.title = element_text(size = 25, face = "bold"),  
@@ -153,9 +154,9 @@ Shannon <- ggplot(samp_dat_wdiv, aes(x=`cn_category`, y=Shannon, fill = cn_categ
     legend.text = element_text(size = 20),                
     legend.title = element_text(size = 25, face = "bold")
   ) +
-  scale_fill_manual(values = c("Low" = "#619CFF", 
-                               "Intermediate" = "#00BA38", 
-                               "High" = "#F8766D"))
+  scale_fill_manual(values = c("Low" = "#E69F00", 
+                               "Intermediate" = "#56B4E9", 
+                               "High" = "#009E73"))
 Shannon
 
 ggsave("wetlands_PD.png"

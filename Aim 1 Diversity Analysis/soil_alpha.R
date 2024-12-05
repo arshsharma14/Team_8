@@ -135,9 +135,9 @@ PD <- ggplot(samp_dat_wdiv, aes(x=`cn_category`, y=PD, fill = cn_category)) +
               y_position = c(70, 65, 60),
               annotations = c("****","**", "***"),
               textsize = 8) + 
-  scale_fill_manual(values = c("Low" = "#619CFF", 
-                               "Intermediate" = "#00BA38", 
-                               "High" = "#F8766D"))
+  scale_fill_manual(values = c("Low" = "#E69F00", 
+                               "Intermediate" = "#56B4E9", 
+                               "High" = "#009E73"))
 
 PD
 
@@ -150,7 +150,7 @@ TukeyHSD(anova_ob_vs_site_log_shannon)
 
 Shannon <- ggplot(samp_dat_wdiv, aes(x=`cn_category`, y=Shannon, fill = cn_category)) +
   geom_boxplot() +
-  labs(x="C:N Category", y="Shannon Evenness", title="Soil", fill = expression(bold("C:N Category"))) +
+  labs(x="C:N Category", y="Shannon Evenness", fill = expression(bold("C:N Category"))) +
   theme_minimal() +
   theme(
     plot.title = element_text(size = 25, face = "bold"),  
@@ -163,9 +163,9 @@ Shannon <- ggplot(samp_dat_wdiv, aes(x=`cn_category`, y=Shannon, fill = cn_categ
               y_position = c(6.25, 5.9),
               annotations = c("***","***"),
               textsize = 8) + 
-  scale_fill_manual(values = c("Low" = "#619CFF", 
-                               "Intermediate" = "#00BA38", 
-                               "High" = "#F8766D"))
+  scale_fill_manual(values = c("Low" = "#E69F00", 
+                               "Intermediate" = "#56B4E9", 
+                               "High" = "#009E73"))
 Shannon
 
 ggsave("soil_PD.png"
@@ -178,7 +178,7 @@ ggsave("soil_shannon.png"
 
 PD2 <- ggplot(samp_dat_wdiv, aes(x=`cn_category`, y=PD, fill = cn_category)) +
   geom_boxplot() +
-  labs(x="C:N Category", y="Faith's PD", title="Forest Soil", fill = expression(bold("C:N Category"))) +
+  labs(x="C:N Category", y="Faith's PD", fill = expression(bold("C:N Category"))) +
   theme(
     plot.title = element_text(size = 35, face = "bold"),  
     axis.text = element_text(size = 25),                  
