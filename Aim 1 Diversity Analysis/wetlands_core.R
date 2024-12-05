@@ -5,7 +5,7 @@ library(microbiome)
 library(ggVennDiagram)
 
 #### Load data ####
-load("soil_final.RData")
+load("wetlands_final.RData")
 
 # Convert to relative abundance
 mpt_RA <- transform_sample_counts(mpt_final, fun=function(x) x/sum(x))
@@ -20,6 +20,22 @@ mpt_high <- subset_samples(mpt_RA, `cn_category`=="High")
 low_ASVs <- core_members(mpt_low, detection=0, prevalence = 0.7)
 int_ASVs <- core_members(mpt_int, detection=0, prevalence = 0.7)
 high_ASVs <- core_members(mpt_high, detection=0, prevalence = 0.7)
+
+# What are these ASVs? you can code it in two different ways to see the same things
+tax_table(prune_taxa(low_ASVs,mpt_final))
+tax_table(prune_taxa(int_ASVs,mpt_final))
+tax_table(prune_taxa(high_ASVs,mpt_final))
+
+# can plot those ASVs' relative abundance
+prune_taxa(low_ASVs,mpt_RA) %>% 
+  plot_bar(fill="Family") + 
+  facet_wrap(.~`cn_category`, scales ="free")
+prune_taxa(int_ASVs,mpt_RA) %>% 
+  plot_bar(fill="Genus") + 
+  facet_wrap(.~`cn_category`, scales ="free")
+prune_taxa(high_ASVs,mpt_RA) %>% 
+  plot_bar(fill="Genus") + 
+  facet_wrap(.~`cn_category`, scales ="free")
 
 # Notice that in this dataset, there are very few CORE microbiome members. This is common
 ### What if we wanted to make a Venn diagram of all the ASVs that showed up in each treatment?
@@ -177,9 +193,33 @@ for (category in names(asv_categories_second)) {
 # Accessing each dataframe individually by name
 unique_low_second_df <- taxonomic_dataframes_second[["unique_low_second"]]
 unique_int_second_df <- taxonomic_dataframes_second[["unique_int_second"]]
+if (nrow(unique_int_second_df) == 0) {
+  # Taxonomic headers extracted from tax_table
+  taxonomic_headers <- c("ASV", colnames(tax_table(mpt_final)))
+  unique_int_second_df <- as.data.frame(matrix(ncol = length(taxonomic_headers), nrow = 0))
+  colnames(unique_int_second_df) <- taxonomic_headers
+}
+unique_int_second_df <- unique_int_second_df %>%
+  mutate(ASV = as.character(ASV))
 unique_high_second_df <- taxonomic_dataframes_second[["unique_high_second"]]
 overlap_low_int_second_df <- taxonomic_dataframes_second[["overlap_low_int_second"]]
+if (nrow(overlap_low_int_second_df) == 0) {
+  # Create a properly structured empty dataframe for overlap_low_int_second_df
+  taxonomic_headers <- c("ASV", colnames(tax_table(mpt_final)))
+  overlap_low_int_second_df <- as.data.frame(matrix(ncol = length(taxonomic_headers), nrow = 0))
+  colnames(overlap_low_int_second_df) <- taxonomic_headers
+}
+overlap_low_int_second_df <- overlap_low_int_second_df %>%
+  mutate(ASV = as.character(ASV))
 overlap_low_high_second_df <- taxonomic_dataframes_second[["overlap_low_high_second"]]
+if (nrow(overlap_low_high_second_df) == 0) {
+  # Create a properly structured empty dataframe for overlap_low_high_second_df
+  taxonomic_headers <- c("ASV", colnames(tax_table(mpt_final)))
+  overlap_low_high_second_df <- as.data.frame(matrix(ncol = length(taxonomic_headers), nrow = 0))
+  colnames(overlap_low_high_second_df) <- taxonomic_headers
+}
+overlap_low_high_second_df <- overlap_low_high_second_df %>%
+  mutate(ASV = as.character(ASV))
 overlap_int_high_second_df <- taxonomic_dataframes_second[["overlap_int_high_second"]]
 overlap_low_int_high_second_df <- taxonomic_dataframes_second[["overlap_low_int_high_second"]]
 if (nrow(overlap_low_int_high_second_df) == 0) {
@@ -207,16 +247,16 @@ library("sf")
 # Create a Venn diagram using all the ASVs shared and unique to categories in taxa_cn_full
 venn <- ggVennDiagram(x = cn_full)
 
-write.csv(unique_high, "soil_taxa_high.csv", row.names = TRUE )
+write.csv(unique_low, "wetlands_taxa_low.csv", row.names = TRUE )
 
-ggsave("soil_venn_combined.png"
+ggsave("wetlands_venn_combined.png"
        , venn
        , height=8, width =8)
 
-ggsave("soil_venn_core.png"
+ggsave("wetlands_venn_core.png"
        , first_venn
        , height=8, width =8)
 
-ggsave("soil_venn_isa.png"
+ggsave("wetlands_venn_isa.png"
        , second_venn
        , height=8, width =8)
