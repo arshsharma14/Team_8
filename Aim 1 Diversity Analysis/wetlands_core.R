@@ -140,7 +140,15 @@ taxa_cn_full <- list(Low = low_taxa, Intermediate = int_taxa, High = high_taxa)
 library("sf")
 
 # Create a Venn diagram using all the ASVs shared and unique to categories in taxa_cn_full
-second_venn <- ggVennDiagram(x = taxa_cn_full)
+second_venn <- ggVennDiagram(x = taxa_cn_full) +
+  theme(
+    text = element_text(size = 15)
+  )
+second_venn
+
+ggsave("wetlands_venn_isa.png"
+       , second_venn
+       , height=8, width =8)
 
 # Extract unique and overlapping ASVs
 unique_low_second <- setdiff(taxa_cn_full[[1]], union(taxa_cn_full[[2]], taxa_cn_full[[3]]))
@@ -257,6 +265,4 @@ ggsave("wetlands_venn_core.png"
        , first_venn
        , height=8, width =8)
 
-ggsave("wetlands_venn_isa.png"
-       , second_venn
-       , height=8, width =8)
+

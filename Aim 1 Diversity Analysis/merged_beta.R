@@ -87,75 +87,45 @@ mpt_final <- subset_samples(mpt_filt_nolow_samps, !is.na(cn_category_per_dataset
 mpt_rare <- rarefy_even_depth(mpt_final, rngseed = 8, sample.size = 5000)
 
 #### Beta diversity #####
-bc_dm <- phyloseq::distance(mpt_rare, method="bray")
-uu_dm <- phyloseq::distance(mpt_rare, method="unifrac")
 wu_dm <- phyloseq::distance(mpt_rare, method="wunifrac")
 
 # create pcoa coordinate systen
-pcoa_bc <- ordinate(mpt_rare, method="PCoA", distance=bc_dm)
-pcoa_uu <- ordinate(mpt_rare, method="PCoA", distance=uu_dm)
 pcoa_wu <- ordinate(mpt_rare, method="PCoA", distance=wu_dm)
 
 # Set row names of metadata to sample IDs for cross-referencing
 rownames(meta) <- meta$`#SampleID`
 
 # Ensure metadata matches the distance matrices using row names
-meta_filtered_bc <- meta[rownames(as.matrix(bc_dm)), , drop = FALSE]
-meta_filtered_uu <- meta[rownames(as.matrix(uu_dm)), , drop = FALSE]
 meta_filtered_wu <- meta[rownames(as.matrix(wu_dm)), , drop = FALSE]
-
-# Run PERMANOVA for Bray-Curtis distance matrix using adonis2
-permanova_bc <- adonis2(bc_dm ~ cn_category_per_dataset, data = meta_filtered_bc, permutations = 999)
-print(permanova_bc)
-
-# Run PERMANOVA for Unweighted UniFrac distance matrix using adonis2
-permanova_uu <- adonis2(uu_dm ~ cn_category_per_dataset, data = meta_filtered_uu, permutations = 999)
-print(permanova_uu)
 
 # Run PERMANOVA for Weighted UniFrac distance matrix using adonis2
 permanova_wu <- adonis2(wu_dm ~ cn_category_per_dataset, data = meta_filtered_wu, permutations = 999)
 print(permanova_wu)
 
 # plot coordination
-gg_pcoa_bc <- plot_ordination(mpt_rare, pcoa_bc, color = "cn_category_per_dataset", shape="subject") +
-  labs(pch="Subject #", col = "C:N Category")
-gg_pcoa_bc <- gg_pcoa_bc +
-  stat_ellipse(aes(group = cn_category_per_dataset), level = 0.95, linetype = "dashed") +
-  annotate("text", x = 0.3, y = -0.375, label = "p < 0.001 ***", size = 5)
-gg_pcoa_bc
-
-gg_pcoa_uu <- plot_ordination(mpt_rare, pcoa_uu, color = "cn_category_per_dataset", shape="subject") +
-  labs(pch="Subject #", col = "C:N Category")
-gg_pcoa_uu <- gg_pcoa_uu +
-  stat_ellipse(aes(group = cn_category_per_dataset), level = 0.95, linetype = "dashed") +
-  annotate("text", x = 0.4, y = -0.375, label = "p < 0.001 ***", size = 5)
-gg_pcoa_uu
-
 gg_pcoa_wu <- plot_ordination(mpt_rare, pcoa_wu, color = "cn_category_per_dataset", shape="subject") +
   labs(pch="Subject #", col = "C:N Category")
-gg_pcoa_wu <- gg_pcoa_wu +
+gg_pcoa_wu_s <- plot_ordination(mpt_rare, pcoa_wu, color = "cn_category_per_dataset", shape="subject") +
+  labs(pch="Subject #", col = "C:N Category") +
+  theme(
+  plot.title = element_text(size = 25, face = "bold"),  
+  axis.text = element_text(size = 25),                  
+  axis.title = element_text(size = 25, face = "bold"),
+  legend.text = element_text(size = 20),                
+  legend.title = element_text(size = 25, face = "bold")) +
   stat_ellipse(aes(group = cn_category_per_dataset), level = 0.95, linetype = "dashed") +
-  annotate("text", x = 0.0872, y = -0.04, label = "p < 0.001 ***", size = 5)
-gg_pcoa_wu
+  annotate("text", x = 0.0872, y = -0.04, label = "p < 0.001", size = 5, fontface = "bold") +
+  annotate("text", x = 0.047, y = 0.035, label = "Wetlands Soil", size = 5, fontface = "bold") +
+ annotate("text", x = -0.016, y = 0.003 , label = "Forest Soil", size = 5, fontface = "bold")
+gg_pcoa_wu_s
+
+ggsave("merged_pcoa.png"
+       , gg_pcoa_wu_s
+       , height=8, width =12)
 
 # create box plots 
 library(reshape2)
 library(dplyr) 
-
-# Bray-Curtis Distance Matrix
-bray_dist_long <- melt(as.matrix(bc_dm))
-colnames(bray_dist_long) <- c("Sample1", "Sample2", "Distance")
-# Merge with meta to add 'cn_category_per_dataset' grouping information
-bray_dist_long <- bray_dist_long %>%
-  left_join(meta, by = c("Sample1" = "#SampleID")) %>%
-  rename(Group = cn_category_per_dataset)
-
-# Unweighted UniFrac Distance Matrix
-unweighted_unifrac_long <- melt(as.matrix(uu_dm))
-colnames(unweighted_unifrac_long) <- c("Sample1", "Sample2", "Distance")
-unweighted_unifrac_long <- unweighted_unifrac_long %>%
-  left_join(meta, by = c("Sample1" = "#SampleID")) %>%
-  rename(Group = cn_category_per_dataset)
 
 # Weighted UniFrac Distance Matrix
 weighted_unifrac_long <- melt(as.matrix(wu_dm))
@@ -165,38 +135,6 @@ weighted_unifrac_long <- weighted_unifrac_long %>%
   rename(Group = cn_category_per_dataset)
 
 library(ggplot2)
-
-# Box Plot for Bray-Curtis Distance Matrix
-gg_box_bc <- ggplot(bray_dist_long, aes(x = Group, y = Distance, fill = Group)) +
-  geom_boxplot() +
-  labs(title = "Beta Diversity Box Plot (Bray-Curtis) by cn_category_per_dataset",
-       x = "Sample Group (cn_category_per_dataset)",
-       y = "Beta Diversity (Bray-Curtis)") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1)) 
-
-# Box Plot for Unweighted UniFrac Distance Matrix
-gg_box_uu <- ggplot(unweighted_unifrac_long, aes(x = Group, y = Distance, fill = Group)) +
-  geom_boxplot() +
-  labs(title = "Beta Diversity Box Plot (Unweighted UniFrac) by cn_category_per_dataset",
-       x = "Sample Group (cn_category_per_dataset)",
-       y = "Beta Diversity (Unweighted UniFrac)") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
-
-# Box Plot for Weighted UniFrac Distance Matrix
-gg_box_wu <- ggplot(weighted_unifrac_long, aes(x = Group, y = Distance, fill = Group)) +
-  geom_boxplot() +
-  labs(title = "Beta Diversity Box Plot (Weighted UniFrac) by cn_category_per_dataset",
-       x = "Sample Group (cn_category_per_dataset)",
-       y = "Beta Diversity (Weighted UniFrac)") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
-
-# Print the plots
-print(gg_box_bc)
-print(gg_box_uu)
-print(gg_box_wu)
 
 # Run Kruskal-Wallis test on the Weighted UniFrac distances
 kruskal_test_wu <- kruskal.test(Distance ~ Group, data = weighted_unifrac_long)
@@ -212,16 +150,15 @@ library(ggsignif)
 # Box Plot for Weighted UniFrac Distance Matrix Grouped by cn_category_per_dataset
 gg_box_wu_s <- ggplot(weighted_unifrac_long, aes(x = Group, y = Distance, fill = Group)) +
   geom_boxplot() +
-  labs(title = "Beta Diversity by C:N category across Datasets",
-       x = "C:N category",
-       y = "Beta Diversity (Weighted UniFrac)") +
+  labs(x = "C:N category",
+       y = "Beta Diversity (Weighted UniFrac)",
+      fill = expression(bold("C:N Category"))) +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1),
-    plot.title = element_text(size = 20, face = "bold"),  
-    axis.text = element_text(size = 14),                  
-    axis.title = element_text(size = 18, face = "bold"),
-    legend.text = element_text(size = 16),                
-    legend.title = element_text(size = 18, face = "bold")
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),  
+        axis.text = element_text(size = 16),                  
+        axis.title = element_text(size = 20, face = "bold"),
+        legend.text = element_text(size = 20),                
+        legend.title = element_text(size = 25, face = "bold")
   ) +
   geom_signif(comparisons = list(
     c("High-Soil", "High-Wetlands"), 
@@ -231,9 +168,7 @@ gg_box_wu_s <- ggplot(weighted_unifrac_long, aes(x = Group, y = Distance, fill =
     y_position = c(0.125, 0.125, 0.125),  # Setting the height for the bars
     tip_length = 0.01,
     textsize = 5)
-
-# Print the plot
-print(gg_box_wu_s)
+gg_box_wu_s
 
 ggsave("merged_wu.png"
        , gg_box_wu_s
