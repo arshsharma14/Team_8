@@ -125,16 +125,15 @@ PD <- ggplot(samp_dat_wdiv, aes(x=`cn_category`, y=PD, fill = cn_category)) +
     plot.title = element_text(size = 25, face = "bold"),  
     axis.text = element_text(size = 25),                  
     axis.title = element_text(size = 25, face = "bold"),
-    legend.text = element_text(size = 20),                
-    legend.title = element_text(size = 25, face = "bold")
-  ) +
+    legend.position = "none") +
   geom_signif(comparisons = list(c("Low","High")),
               y_position = c(175),
               annotations = c("**"),
               textsize = 8) + 
   scale_fill_manual(values = c("Low" = "#E69F00", 
                                "Intermediate" = "#56B4E9", 
-                               "High" = "#009E73"))
+                               "High" = "#009E73")) +
+  scale_y_continuous(limits = c(10, NA))
 
 PD
 
@@ -151,12 +150,11 @@ Shannon <- ggplot(samp_dat_wdiv, aes(x=`cn_category`, y=Shannon, fill = cn_categ
     plot.title = element_text(size = 25, face = "bold"),  
     axis.text = element_text(size = 25),                  
     axis.title = element_text(size = 25, face = "bold"),
-    legend.text = element_text(size = 20),                
-    legend.title = element_text(size = 25, face = "bold")
-  ) +
+    legend.position = "none") +
   scale_fill_manual(values = c("Low" = "#E69F00", 
                                "Intermediate" = "#56B4E9", 
-                               "High" = "#009E73"))
+                               "High" = "#009E73")) +
+  scale_y_continuous(limits = c(3, NA))
 Shannon
 
 ggsave("wetlands_PD.png"
