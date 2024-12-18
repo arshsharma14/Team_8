@@ -12,7 +12,7 @@
 
 ## Finalized Codes ##
 ### R Wrangling
-[Forest Soil Wrangling](/R/Wrangling/soil_wrangle.R) | [Wetlands Soil Wrangling](/R/Wrangling/wetlands_wrangle.R) | [Merged Wrangling](/R/Wrangling/merded_wrangle.R)
+[Forest Soil Dataset Wrangling](/R/Wrangling/soil_wrangle.R) | [Wetlands Soil Dataset Wrangling](/R/Wrangling/wetlands_wrangle.R) | [Merged Dataset Wrangling](/R/Wrangling/merded_wrangle.R)
 ### QIIME2
 [Soil](/qiime/Soil/Soil_qiime) | [Wetlands](/qiime/Wetlands/Wetlands_qiime) | [Merged](/qiime/Merged/Merged_qiime)
 ### R
