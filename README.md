@@ -17,5 +17,5 @@
 [Soil](/qiime/Soil/Soil_qiime) | [Wetlands](/qiime/Wetlands/Wetlands_qiime) | [Merged](/qiime/Merged/Merged_qiime)
 ### R
 * Aim 1: [Forest Soil Alpha Diversity ](/R/Aim1_Diversity_Analysis/soil_alpha.R) | [Wetlands Soil Alpha Diversity ](/R/Aim1_Diversity_Analysis/wetlands_alpha.R) | [Merged Dataset Beta Diversity ](/R/Aim1_Diversity_Analysis/merged_beta.R)
-* Aim 2: [Forest Soil Differential Abundance Analysis](R/Aim2_Taxonomic_Analysis/soil_taxonomic.R) | [Wetlands Soil Differential Abundance Analysis](R/Aim2_Taxonomic_Analysis/wetlands_taxonomic.R) | [Forest Soil Indicative Species Analysis](R/Aim2_Taxonomic_Analysis/soil_isa.R) | [Wetlands Soil Indicative Species Analysis](R/Aim2_Taxonomic_Analysis/wetlands_isa.R)
+* Aim 2: [Forest Soil Differential Abundance Analysis](R/Aim2_Taxonomic_Analysis/soil_taxonomic.R) | [Wetlands Soil Differential Abundance Analysis](R/Aim2_Taxonomic_Analysis/wetlands_taxonomic.R) | [Forest Soil Indicator Species Analysis](R/Aim2_Taxonomic_Analysis/soil_isa.R) | [Wetlands Soil Indicator Species Analysis](R/Aim2_Taxonomic_Analysis/wetlands_isa.R)
 * Aim 3: [Forest Soil Functional Analysis](/R/Aim3_Functional_Analysis/soil_functional.R) | [Wetlands Soil Functional Analysis](/R/Aim3_Functional_Analysis/wetlands_functional.R)
