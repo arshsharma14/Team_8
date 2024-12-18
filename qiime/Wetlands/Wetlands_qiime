@@ -148,8 +148,6 @@ qiime phylogeny align-to-tree-mafft-fasttree \
   --o-rooted-tree rooted-tree.qza 
 # creates rooted: show lowest common ancestor LCA & unrooted: does not show LCA
 
-#ABOVE RUNNNING#
-
 # Sequencing depth: how many reads in sample
   # Sampling depth: what want to set as our rarefaction parameter - any sample with lower amount of reads will be discarded 
 
