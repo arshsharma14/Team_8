@@ -2,7 +2,7 @@
 
 ## Meeting Agenda and Meeting Minutes ##
 ### September
-[September 25](/Meeting_minutes/Sept 25.md)
+[September 25](/Meeting_minutes/Sept_25.md)
 ### October
 
 ### November
