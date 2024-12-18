@@ -1,5 +1,4 @@
 # Load in Libraries
-install.packages("ggthemes")
 library(phyloseq)
 library(ape) # importing trees
 library(tidyverse)

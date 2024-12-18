@@ -119,12 +119,22 @@ low_taxa <- isa_df %>% filter(s.Low == 1) %>% pull(ASV)
 int_taxa <- isa_df %>% filter(s.Intermediate == 1) %>% pull(ASV)
 high_taxa <- isa_df %>% filter(s.High == 1) %>% pull(ASV)
 
+# look at 0.8 and higher and investigate those species or pick top 5/10 highest indicator values #
+# show high and low, 
 taxa_cn_full <- list(Low = low_taxa, Intermediate = int_taxa, High = high_taxa)
 
 library("sf")
 
 # Create a Venn diagram using all the ASVs shared and unique to categories in taxa_cn_full
-second_venn <- ggVennDiagram(x = taxa_cn_full)
+second_venn <- ggVennDiagram(x = taxa_cn_full) +
+  theme(
+    text = element_text(size = 15)
+  )
+second_venn
+
+ggsave("soil_isa.png"
+       , second_venn
+       , height=8, width =8, dpi=300)
 
 # Extract unique and overlapping ASVs
 unique_low_second <- setdiff(taxa_cn_full[[1]], union(taxa_cn_full[[2]], taxa_cn_full[[3]]))
