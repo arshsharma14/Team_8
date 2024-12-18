@@ -15,5 +15,5 @@
 
 ### R
 * Aim 1: [Alpha & Beta Diversity Forest Soil](/R/Aim1_Diversity_Analysis/soil_alpha.R) | [Alpha & Beta Diversity Wetlands Soil](/R/Aim1_Diversity_Analysis/wetlands_alpha.R) 
-* Aim 2:
+* Aim 2: [Forest Soil Indicative Species Analysis](R/Aim2_Taxonomic_Analysis/soil_isa.R) | [Wetlands Soil Indicative Species Analysis](R/Aim2_Taxonomic_Analysis/wetlands_isa.R) | [Forest Soil Differential Expression Analysis (DESeq)](R/Aim2_Taxonomic_Analysis/soil_taxonomic.R) | [Forest Soil Differential Expression Analysis (DESeq)](R/Aim2_Taxonomic_Analysis/wetlands_taxonomic.R)
 * Aim 3: [Forest Soil Functional Analysis](/R/Aim3_Functional_Analysis/soil_functional.R) | [Wetlands Soil Functional Analysis](/R/Aim3_Functional_Analysis/wetlands_functional.R)
