@@ -14,7 +14,7 @@
 ### R Wrangling
 [Forest Soil Wrangling](/R/Wrangling/soil_wrangle.R) | [Wetlands Soil Wrangling](/R/Wrangling/wetlands_wrangle.R) | [Merged Wrangling](/R/Wrangling/merded_wrangle.R)
 ### QIIME2
-[Soil](/R/qiime/Soil/Soil_qiime) | [Wetlands](/R/qiime/Wetlands/Wetlands_qiime) | [Merged](/R/qiime/Merged/Merged_qiime)
+[Soil](/qiime/Soil/Soil_qiime) | [Wetlands](/qiime/Wetlands/Wetlands_qiime) | [Merged](/qiime/Merged/Merged_qiime)
 ### R
 * Aim 1: [Alpha & Beta Diversity Forest Soil](/R/Aim1_Diversity_Analysis/soil_alpha.R) | [Alpha & Beta Diversity Wetlands Soil](/R/Aim1_Diversity_Analysis/wetlands_alpha.R) 
 * Aim 2: [Forest Soil Differential Abundance Analysis](R/Aim2_Taxonomic_Analysis/soil_taxonomic.R) | [Wetlands Soil Differential Abundance Analysis](R/Aim2_Taxonomic_Analysis/wetlands_taxonomic.R) | [Forest Soil Indicative Species Analysis](R/Aim2_Taxonomic_Analysis/soil_isa.R) | [Wetlands Soil Indicative Species Analysis](R/Aim2_Taxonomic_Analysis/wetlands_isa.R)
