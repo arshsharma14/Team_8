@@ -1,4 +1,4 @@
-# MICB 475: Data Science Research in Microbiology
+# Team 8 - MICB 475: Data Science Research in Microbiology
 
 ## Meeting Agenda and Meeting Minutes ## ✨
 ### September
