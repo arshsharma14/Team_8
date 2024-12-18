@@ -9,3 +9,11 @@
 [November 6](/Meeting_minutes/Nov_6.md) | [November 20](/Meeting_minutes/Nov_20.md) | [November 27](/Meeting_minutes/Nov_27.md)
 ### December
 [December 2](/Meeting_minutes/Dec_2.md)
+
+## Finalized Codes ##
+### QIIME2
+
+### R
+* Aim 1: [Alpha Diversity Forest Soil](/R/Aim1_Diversity_Analysis/soil_alpha.R) | [Alpha Diversity Wetlands Soil](/R/Aim1_Diversity_Analysis/wetlands_alpha.R) | [Shannon Diversity Forest Soil](/R/Aim1_Diversity_Analysis/soil_shannon.R) | [Shannon Diversity Wetlands Soil](/R/Aim1_Diversity_Analysis/wetlands_shannon.R)
+* Aim 2:
+* Aim 3: [Forest Soil Functional Analysis](/R/Aim3_Functional_Analysis/soil_functional.R) | [Wetlands Soil Functional Analysis](/R/Aim3_Functional_Analysis/wetlands_functional.R)
