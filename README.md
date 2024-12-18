@@ -14,6 +14,6 @@
 ### QIIME2
 
 ### R
-* Aim 1: [Alpha Diversity Forest Soil](/R/Aim1_Diversity_Analysis/soil_alpha.R) | [Alpha Diversity Wetlands Soil](/R/Aim1_Diversity_Analysis/wetlands_alpha.R) 
+* Aim 1: [Alpha & Beta Diversity Forest Soil](/R/Aim1_Diversity_Analysis/soil_alpha.R) | [Alpha & Beta Diversity Wetlands Soil](/R/Aim1_Diversity_Analysis/wetlands_alpha.R) 
 * Aim 2:
 * Aim 3: [Forest Soil Functional Analysis](/R/Aim3_Functional_Analysis/soil_functional.R) | [Wetlands Soil Functional Analysis](/R/Aim3_Functional_Analysis/wetlands_functional.R)
