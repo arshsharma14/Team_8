@@ -1,4 +1,4 @@
-install.packages("readxl")
+# load libraries #
 library(readxl)
 library(phyloseq)
 library(ape) # importing trees

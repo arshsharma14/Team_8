@@ -13,14 +13,14 @@ library(ggh4x)
 
 #### Import files and preparing tables ####
 #Importing the pathway PICrsut2
-abundance_file <- "../qiime/Soil/picrust2/pathway_abundance.tsv"
+abundance_file <- "../../Qiime/Wetlands/picrust2/pathway_abundance.tsv"
 abundance_data <- fread(abundance_file, sep = "\t", header = TRUE, strip.white = TRUE)
 abundance_data  =as.data.frame(abundance_data)
 
 setnames(abundance_data, old = "#OTU ID", new = "pathway")
 
 #Import your metadata file, no need to filter yet
-metadata <- read_delim("../wrangling/soil_metadata.tsv")
+metadata <- read_delim("../wrangling/wetlands_metadata.tsv")
 
 setnames(metadata, old = "#SampleID", new = "sample-id")
 #Example Looking at subject number
@@ -71,7 +71,7 @@ colnames(abundance)[1] = "feature"
 abundance_desc = inner_join(abundance,metacyc_daa_annotated_results_df, by = "feature")
 abundance_desc$feature = abundance_desc$description
 #this line will change for each dataset. 34 represents the number of samples in the filtered abundance table
-abundance_desc = abundance_desc[,-c(344:ncol(abundance_desc))] 
+abundance_desc = abundance_desc[,-c(79:ncol(abundance_desc))] 
 
 # Filter tables for category vs category - abundance_desc ; abundance_data_filtered ; metacyc_daa_annotated_results_df
 
@@ -97,14 +97,13 @@ sig_res = res_desc %>%
 
 # Filter log2FoldChange values to keep only those > 1 or < -1
 sig_res_1 <- sig_res[sig_res$log2FoldChange > 1 | sig_res$log2FoldChange < -1, ]
-sig_res_1$log2FoldChange <- sig_res_1$log2FoldChange * -1
 
 sig_res_1 <- sig_res_1[order(sig_res_1$log2FoldChange),]
 log2_fold_change_1 <- ggplot(data = sig_res_1, aes(y = reorder(description, sort(as.numeric(log2FoldChange))), x= log2FoldChange, fill = pvalue))+
   geom_bar(stat = "identity")+ 
   theme_bw()+
   labs(
-    title = "Soil High vs Low", 
+    title = "Wetlands High vs Low", 
     x = "Log2 Fold Change", 
     y = "Pathways",
     fill = expression(bold("P Value"))  
@@ -116,8 +115,7 @@ log2_fold_change_1 <- ggplot(data = sig_res_1, aes(y = reorder(description, sort
   )
 log2_fold_change_1
 
-
-ggsave("soil_lvh_log2_1.png"
+ggsave("wetlands_lvh_log2_1.png"
        , log2_fold_change_1
        , height=8, width =12)
 
@@ -133,4 +131,3 @@ count <- data.frame(
   Count = c(positive_count, negative_count)
 )
 count
-

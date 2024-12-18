@@ -6,19 +6,18 @@ library(vegan)
 library(picante)
 library(ggsignif)
 library(ggthemes)
-
 #### Load data ####
 # Change file paths as necessary
-metafp <- "../wrangling/soil_metadata.tsv"
+metafp <- "../Wrangling/wetlands_metadata.tsv"
 meta <- read_delim(metafp, delim="\t")
 
-otufp <- "../qiime/Soil/soil_export/table_export/feature-table.txt"
+otufp <- "../../Qiime/Wetlands/wetlands_export/table_export/feature-table.txt"
 otu <- read_delim(file = otufp, delim="\t", skip=1)
 
-taxfp <- "../qiime/Soil/soil_export/taxonomy_export/taxonomy.tsv"
+taxfp <- "../../Qiime/Wetlands/wetlands_export/taxonomy_export/taxonomy.tsv"
 tax <- read_delim(taxfp, delim="\t")
 
-phylotreefp <- "../qiime/Soil/soil_export/rooted_tree_export/tree.nwk"
+phylotreefp <- "../../Qiime/Wetlands/wetlands_export/rooted_tree_export/tree.nwk"
 phylotree <- read.tree(phylotreefp)
 
 #### Format OTU table ####
@@ -86,12 +85,10 @@ mpt_final <- subset_samples(mpt_filt_nolow_samps, !is.na(cn_category) )
 # t transposes the table to use rarecurve function
 # cex decreases font size
 # rarecurve(t(as.data.frame(otu_table(mpt_final))), cex=0.1)
+mpt_rare <- rarefy_even_depth(mpt_final, rngseed = 8, sample.size = 20000)
 
-mpt_rare <- rarefy_even_depth(mpt_final, rngseed = 8, sample.size = 2500)
-plot_richness(mpt_rare)
-
-save(mpt_final, file = "soil_final.RData")
-save(mpt_rare, file = "soil_rare.RData")
+save(mpt_final, file = "wetlands_final.RData")
+save(mpt_rare, file = "wetlands_rare.RData")
 
 #### Alpha diversity ######
 # phylogenetic diversity
@@ -122,25 +119,23 @@ samp_dat_wdiv$cn_category <- factor(samp_dat_wdiv$cn_category, levels = c("Low",
 
 PD <- ggplot(samp_dat_wdiv, aes(x=`cn_category`, y=PD, fill = cn_category)) +
   geom_boxplot() +
-  labs(x="C:N Category", y="Faith's PD", fill = expression(bold("C:N Category"))) +
+  labs(x="C:N Category", y="Faith's PD",fill = expression(bold("C:N Category"))) +
   theme_minimal() +
   theme(
     plot.title = element_text(size = 25, face = "bold"),  
     axis.text = element_text(size = 25),                  
     axis.title = element_text(size = 25, face = "bold"),
     legend.position = "none") +
-  geom_signif(comparisons = list(c("Low","High"), c("Low", "Intermediate"), c("Intermediate", "High")),
-              y_position = c(70, 65, 60),
-              annotations = c("****","**", "***"),
+  geom_signif(comparisons = list(c("Low","High")),
+              y_position = c(175),
+              annotations = c("**"),
               textsize = 8) + 
   scale_fill_manual(values = c("Low" = "#E69F00", 
                                "Intermediate" = "#56B4E9", 
                                "High" = "#009E73")) +
-  scale_y_continuous(limits = c(8, NA))
+  scale_y_continuous(limits = c(10, NA))
 
 PD
-
-samp_dat_wdiv$cn_category <- factor(samp_dat_wdiv$cn_category, levels = c("Low", "Intermediate", "High"))
 
 lm_ob_vs_site_log_shannon <- lm(log(Shannon) ~ `cn_category`, data=samp_dat_wdiv)
 anova_ob_vs_site_log_shannon <- aov(lm_ob_vs_site_log_shannon)
@@ -148,29 +143,24 @@ summary(anova_ob_vs_site_log_shannon)
 TukeyHSD(anova_ob_vs_site_log_shannon)
 
 Shannon <- ggplot(samp_dat_wdiv, aes(x=`cn_category`, y=Shannon, fill = cn_category)) +
-  geom_boxplot() +
+  geom_boxplot() + 
   labs(x="C:N Category", y="Shannon Evenness", fill = expression(bold("C:N Category"))) +
   theme_minimal() +
   theme(
     plot.title = element_text(size = 25, face = "bold"),  
     axis.text = element_text(size = 25),                  
     axis.title = element_text(size = 25, face = "bold"),
-    legend.position = "none"
-  ) +
-  geom_signif(comparisons = list(c("Low","High"), c("Low", "Intermediate")),
-              y_position = c(6.25, 5.9),
-              annotations = c("***","***"),
-              textsize = 8) + 
+    legend.position = "none") +
   scale_fill_manual(values = c("Low" = "#E69F00", 
                                "Intermediate" = "#56B4E9", 
                                "High" = "#009E73")) +
   scale_y_continuous(limits = c(3, NA))
 Shannon
 
-ggsave("soil_PD.png"
+ggsave("wetlands_PD.png"
        , PD
        , height=8, width =12)
 
-ggsave("soil_shannon.png"
+ggsave("wetlands_shannon.png"
        , Shannon
        , height=8, width =12)

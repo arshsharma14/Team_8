@@ -8,16 +8,16 @@ library(ggsignif)
 
 #### Load data ####
 # Change file paths as necessary
-metafp <- "../wrangling/merged_wrangled_metadata.tsv"
+metafp <- "../Wrangling/merged_wrangled_metadata.tsv"
 meta <- read_delim(metafp, delim="\t")
 
-otufp <- "../qiime/Merged/merged_export/table_export/feature-table.txt"
+otufp <- "../../Qiime/Merged/merged_export/table_export/feature-table.txt"
 otu <- read_delim(file = otufp, delim="\t", skip=1)
 
-taxfp <- "../qiime/Merged/merged_export/taxonomy_export/taxonomy.tsv"
+taxfp <- "../../Qiime/Merged/merged_export/taxonomy_export/taxonomy.tsv"
 tax <- read_delim(taxfp, delim="\t")
 
-phylotreefp <- "../qiime/Merged/merged_export/rooted_tree_export/tree.nwk"
+phylotreefp <- "../../Qiime/Merged/merged_export/rooted_tree_export/tree.nwk"
 phylotree <- read.tree(phylotreefp)
 
 #### Format OTU table ####
