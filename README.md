@@ -9,12 +9,3 @@
 [November 6](/Meeting_minutes/Nov_6.md) | [November 20](/Meeting_minutes/Nov_20.md) | [November 27](/Meeting_minutes/Nov_27.md)
 ### December
 [December 2](/Meeting_minutes/Dec_2.md)
-## Finalized Codes ##
-### QIIME2
-*
-*
-### R
-*
-*
-*
-*
